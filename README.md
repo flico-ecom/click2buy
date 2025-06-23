@@ -149,3 +149,4 @@ The resulting language should match your browser language. You can also override
 "# click2buy" 
 "# click2buy" 
 "# click2buy" 
+"# click2buy" 
