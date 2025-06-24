@@ -1,4 +1,4 @@
-import { $, component$, useContext, useStore, useVisibleTask$ } from '@qwik.dev/core';
+import { $, component$, useContext, useStore, useVisibleTask$ } from '@builder.io/qwik';
 import { useNavigate } from '@qwik.dev/router';
 import CartContents from '~/components/cart-contents/CartContents';
 import CartTotals from '~/components/cart-totals/CartTotals';

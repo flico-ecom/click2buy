@@ -1,4 +1,4 @@
-import { $, component$, useContext, useSignal, useVisibleTask$ } from '@qwik.dev/core';
+import { $, component$, useContext, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import { isBrowser } from '@qwik.dev/core/build';
 import { Image } from 'qwik-image';
 import { Button } from '~/components/buttons/Button';
