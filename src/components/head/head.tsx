@@ -21,6 +21,12 @@ export const Head = component$(() => {
 			<link rel="preconnect" href="https://demo.vendure.io" />
 			<link rel="canonical" href={loc.url.toString()} />
 
+			{/* google fonts */}
+			<link
+				href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+				rel="stylesheet"
+			/>
+
 			{head.meta.map((m, key) => (
 				<meta key={key} {...m} />
 			))}
