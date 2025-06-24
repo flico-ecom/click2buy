@@ -1,4 +1,4 @@
-import { component$, useContext, useSignal, useVisibleTask$ } from '@qwik.dev/core';
+import { component$, useContext, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import { useNavigate } from '@qwik.dev/router';
 import AddressCard from '~/components/account/AddressCard';
 import { HighlightedButton } from '~/components/buttons/HighlightedButton';

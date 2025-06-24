@@ -1,4 +1,4 @@
-import { component$, useComputed$, useContext, useSignal, useTask$ } from '@qwik.dev/core';
+import { component$, useComputed$, useContext, useSignal, useTask$ } from '@builder.io/qwik';
 import { useLocation, useNavigate } from '@qwik.dev/router';
 import { Image } from 'qwik-image';
 import { APP_STATE } from '~/constants';

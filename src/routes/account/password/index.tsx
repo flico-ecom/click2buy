@@ -1,4 +1,4 @@
-import { $, component$, useContext, useSignal } from '@qwik.dev/core';
+import { $, component$, useContext, useSignal } from '@builder.io/qwik';
 import { useNavigate } from '@qwik.dev/router';
 import { HighlightedButton } from '~/components/buttons/HighlightedButton';
 import { ErrorMessage } from '~/components/error-message/ErrorMessage';
