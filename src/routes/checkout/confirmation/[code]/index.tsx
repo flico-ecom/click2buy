@@ -1,4 +1,4 @@
-import { QRL, component$, useStore, useVisibleTask$ } from '@builder.io/qwik';
+import { QRL, component$, useContext, useStore, useVisibleTask$ } from '@builder.io/qwik';
 import { useLocation } from '@qwik.dev/router';
 import CartContents from '~/components/cart-contents/CartContents';
 import CartTotals from '~/components/cart-totals/CartTotals';
@@ -6,10 +6,12 @@ import CheckCircleIcon from '~/components/icons/CheckCircleIcon';
 import ChevronRightIcon from '~/components/icons/ChevronRightIcon';
 import { Order } from '~/generated/graphql';
 import { getOrderByCodeQuery } from '~/providers/shop/orders/order';
+import { APP_STATE } from '~/constants';
 
 type Step = 'SHIPPING' | 'PAYMENT' | 'CONFIRMATION';
 
 export default component$<{ onForward$: QRL<() => void> }>(() => {
+	const appState = useContext(APP_STATE);
 	const {
 		params: { code },
 	} = useLocation();
@@ -60,6 +62,12 @@ export default component$<{ onForward$: QRL<() => void> }>(() => {
 										</div>
 										<CartTotals order={store.order} readonly />
 									</div>
+									{appState.selectedPaymentMethodName && (
+										<p class="text-lg text-gray-700 mt-4">
+											{$localize`Chosen Payment Method:`}{' '}
+											<span class="font-bold">{appState.selectedPaymentMethodName}</span>
+										</p>
+									)}
 								</div>
 							</div>
 						</div>

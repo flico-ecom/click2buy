@@ -579,3 +579,16 @@ export type CurrencyCode =
 	| 'ZMW'
 	/** Zimbabwean dollar */
 	| 'ZWL';
+
+declare global {
+	interface Window {
+		payhere: {
+			startPayment: (payment: any) => void; // Updated signature based on usage
+			onAndOff: boolean;
+			merchantId: string;
+			onCompleted: (orderId: string) => void;
+			onDismissed: () => void;
+			onError: (error: string) => void;
+		};
+	}
+}

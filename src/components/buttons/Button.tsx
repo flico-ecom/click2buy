@@ -3,9 +3,10 @@ import { $, component$, QRL, Slot } from '@builder.io/qwik';
 type Props = {
 	extraClass?: string;
 	onClick$?: QRL<() => void>;
+	disabled?: boolean;
 };
 
-export const Button = component$<Props>(({ extraClass = '', onClick$ }) => {
+export const Button = component$<Props>(({ extraClass = '', onClick$, disabled = false }) => {
 	return (
 		<button
 			type="button"
@@ -13,6 +14,7 @@ export const Button = component$<Props>(({ extraClass = '', onClick$ }) => {
 			onClick$={$(async () => {
 				onClick$ && onClick$();
 			})}
+			disabled={disabled}
 		>
 			<Slot />
 		</button>

@@ -25,6 +25,9 @@ importers:
       braintree-web-drop-in:
         specifier: ^1.42.0
         version: 1.43.0
+      crypto-js:
+        specifier: ^4.2.0
+        version: 4.2.0
       graphql:
         specifier: ^16.8.1
         version: 16.10.0
@@ -77,6 +80,9 @@ importers:
       '@types/braintree-web-drop-in':
         specifier: ^1.39.3
         version: 1.39.3
+      '@types/crypto-js':
+        specifier: ^4.2.2
+        version: 4.2.2
       '@types/eslint':
         specifier: 8.56.2
         version: 8.56.2
@@ -2357,6 +2363,12 @@ packages:
         integrity: sha512-v9gbS2vxpM5Bu5xpUMbKpZVqLjU1SZrDNXtSNSQtKH7Jc8W3dD4n5WK5z+sdnCsZU31/OXkeM/y/mOi8KQjpFw==,
       }
 
+  '@types/crypto-js@4.2.2':
+    resolution:
+      {
+        integrity: sha512-sDOLlVbHhXpAUAL0YHDUUwDZf3iN4Bwi4W6a0W0b+QcAezUbRtH4FVb+9J4h+XFPW7l/gQ9F8qC7P+Ec4k8QVQ==,
+      }
+
   '@types/debug@4.1.12':
     resolution:
       {
@@ -3293,6 +3305,12 @@ packages:
         integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==,
       }
     engines: { node: '>= 8' }
+
+  crypto-js@4.2.0:
+    resolution:
+      {
+        integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==,
+      }
 
   css-select@5.1.0:
     resolution:
@@ -8722,6 +8740,8 @@ snapshots:
       '@types/googlepay': 0.7.6
       '@types/paypal-checkout-components': 4.0.8
 
+  '@types/crypto-js@4.2.2': {}
+
   '@types/debug@4.1.12':
     dependencies:
       '@types/ms': 0.7.34
@@ -9385,6 +9405,8 @@ snapshots:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  crypto-js@4.2.0: {}
 
   css-select@5.1.0:
     dependencies:
