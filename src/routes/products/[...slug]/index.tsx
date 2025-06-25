@@ -174,13 +174,13 @@ export default component$(() => {
 											$localize`Add to cart`
 										)}
 									</button>
-									<button
+									{/* <button
 										type="button"
 										class="ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
 									>
 										<HeartIcon />
 										<span class="sr-only">{$localize`Add to favorites`}</span>
-									</button>
+									</button> */}
 								</div>
 							</div>
 							<div class="mt-2 flex items-center space-x-2">
@@ -213,11 +213,11 @@ export default component$(() => {
 					</div>
 				</div>
 			</div>
-			{isEnvVariableEnabled('VITE_SHOW_REVIEWS') && (
+			{/* {isEnvVariableEnabled('VITE_SHOW_REVIEWS') && (
 				<div class="mt-24">
 					<TopReviews />
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 });

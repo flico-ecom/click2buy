@@ -9,6 +9,8 @@ export type AppState = {
 	shippingAddress: ShippingAddress;
 	availableCountries: Country[];
 	addressBook: ShippingAddress[];
+	selectedPaymentMethodCode?: string;
+	selectedPaymentMethodName?: string;
 };
 
 export type Product = {

@@ -75,7 +75,9 @@
 		"braintree-web-drop-in": "^1.42.0",
 		"graphql": "^16.8.1",
 		"graphql-tag": "^2.12.6",
+		"gsap": "^3.13.0",
 		"qwik-image": "0.0.16",
+		"sweetalert2": "^11.22.1",
 		"swiper": "^11.2.8",
 		"zod": "^3.22.4"
 	},

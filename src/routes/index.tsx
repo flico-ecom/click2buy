@@ -1,6 +1,9 @@
 import { component$, useContext } from '@builder.io/qwik';
+import AdBanners from '~/components/ad-banners/AdBanners';
 import { CollectionCarousel } from '~/components/carousel/CollectionCarousel';
 import Hero from '~/components/carousel/Hero';
+import RecommendedProducts from '~/components/recommended-products/RecommendedProducts';
+import TopSellings from '~/components/top-sellings/TopSellings';
 import { APP_STATE } from '~/constants';
 
 export default component$(() => {
@@ -17,6 +20,11 @@ export default component$(() => {
 								<h2 class="sub-title">{$localize`Shop by Category`}</h2>
 							</div>
 							<CollectionCarousel collections={collections} autoplayInterval={3000} />
+							<TopSellings />
+							<div class="flex flex-col-reverse md:flex-col ">
+								<AdBanners />
+								<RecommendedProducts />
+							</div>
 						</div>
 					</div>
 				</div>
