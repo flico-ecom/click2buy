@@ -4,16 +4,14 @@ import { Image } from 'qwik-image';
 import Alert from '~/components/alert/Alert';
 import Breadcrumbs from '~/components/breadcrumbs/Breadcrumbs';
 import CheckIcon from '~/components/icons/CheckIcon';
-import HeartIcon from '~/components/icons/HeartIcon';
 import Price from '~/components/products/Price';
 import StockLevelLabel from '~/components/stock-level-label/StockLevelLabel';
-import TopReviews from '~/components/top-reviews/TopReviews';
 import { APP_STATE } from '~/constants';
 import { Order, OrderLine } from '~/generated/graphql';
 import { addItemToOrderMutation } from '~/providers/shop/orders/order';
 import { getProductBySlug } from '~/providers/shop/products/products';
 import { Variant } from '~/types';
-import { cleanUpParams, generateDocumentHead, isEnvVariableEnabled } from '~/utils';
+import { cleanUpParams, generateDocumentHead } from '~/utils';
 
 export const useProductLoader = routeLoader$(async ({ params }) => {
 	const { slug } = cleanUpParams(params);

@@ -35,7 +35,7 @@ export const AdBanner = component$<IProps>(
 							alt={title}
 							class="object-cover w-full h-full"
 							layout="fullWidth"
-							style="aspect-ratio: 4/3;"
+							style={{ aspectRatio: '4/3' }}
 						/>
 					</div>
 				</div>

@@ -20,7 +20,7 @@ export const AdBannerSimple = component$<IProps>(({ alt, imageSrc, targetUrl }: 
 					layout="constrained"
 					sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 					class="md:object-cover object-contain w-full h-full"
-					style="aspect-ratio: 16/9;"
+					style={{ aspectRatio: '16/9' }}
 				/>
 			</div>
 		</a>
