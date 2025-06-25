@@ -4,16 +4,14 @@ import { Image } from 'qwik-image';
 import Alert from '~/components/alert/Alert';
 import Breadcrumbs from '~/components/breadcrumbs/Breadcrumbs';
 import CheckIcon from '~/components/icons/CheckIcon';
-import HeartIcon from '~/components/icons/HeartIcon';
 import Price from '~/components/products/Price';
 import StockLevelLabel from '~/components/stock-level-label/StockLevelLabel';
-import TopReviews from '~/components/top-reviews/TopReviews';
 import { APP_STATE } from '~/constants';
 import { Order, OrderLine } from '~/generated/graphql';
 import { addItemToOrderMutation } from '~/providers/shop/orders/order';
 import { getProductBySlug } from '~/providers/shop/products/products';
 import { Variant } from '~/types';
-import { cleanUpParams, generateDocumentHead, isEnvVariableEnabled } from '~/utils';
+import { cleanUpParams, generateDocumentHead } from '~/utils';
 
 export const useProductLoader = routeLoader$(async ({ params }) => {
 	const { slug } = cleanUpParams(params);
@@ -174,13 +172,13 @@ export default component$(() => {
 											$localize`Add to cart`
 										)}
 									</button>
-									<button
+									{/* <button
 										type="button"
 										class="ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
 									>
 										<HeartIcon />
 										<span class="sr-only">{$localize`Add to favorites`}</span>
-									</button>
+									</button> */}
 								</div>
 							</div>
 							<div class="mt-2 flex items-center space-x-2">
@@ -213,11 +211,11 @@ export default component$(() => {
 					</div>
 				</div>
 			</div>
-			{isEnvVariableEnabled('VITE_SHOW_REVIEWS') && (
+			{/* {isEnvVariableEnabled('VITE_SHOW_REVIEWS') && (
 				<div class="mt-24">
 					<TopReviews />
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 });

@@ -1,6 +1,7 @@
 import { $, component$, useOnDocument, useStyles$ } from '@qwik.dev/core';
 import { QwikRouterProvider, RouterOutlet, ServiceWorkerRegister } from '@qwik.dev/router';
 import { Head } from './components/head/head';
+import { useToastProvider } from './components/toast/ToastContext';
 
 import globalStyles from './global.css?inline';
 import { useI18n } from './utils/i18n';
@@ -14,6 +15,7 @@ export default component$(() => {
 	 */
 	useStyles$(globalStyles);
 	useOnDocument('qinit', $(useI18n));
+	useToastProvider();
 
 	return (
 		<QwikRouterProvider>

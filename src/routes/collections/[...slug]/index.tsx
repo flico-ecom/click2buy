@@ -77,6 +77,10 @@ export default component$(() => {
 			? await searchQueryWithTerm(params.slug, '', state.facetValueIds)
 			: await searchQueryWithCollectionSlug(params.slug);
 	});
+	let subcollectioncount = 1;
+	if (collectionSignal.value.children?.length) {
+		subcollectioncount = collectionSignal.value.children.length - 1;
+	}
 
 	const onOpenCloseFilter = $((id: string) => {
 		state.facedValues = state.facedValues.map((f) => {
@@ -97,9 +101,7 @@ export default component$(() => {
 			}}
 		>
 			<div class="flex justify-between items-center">
-				<h2 class="text-3xl sm:text-5xl font-light tracking-tight text-gray-900 my-8">
-					{collectionSignal.value.name}
-				</h2>
+				<h2 class="title">{collectionSignal.value.name}</h2>
 				<div>
 					{!!state.facedValues.length && (
 						<FiltersButton
@@ -114,8 +116,8 @@ export default component$(() => {
 				<Breadcrumbs items={collectionSignal.value.breadcrumbs || []}></Breadcrumbs>
 				{!!collectionSignal.value.children?.length && (
 					<div class="max-w-2xl mx-auto py-16 sm:py-16 lg:max-w-none border-b mb-16">
-						<h2 class="text-2xl font-light text-gray-900">Collections</h2>
-						<div class="mt-6 grid max-w-xs sm:max-w-none mx-auto sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
+						<h2 class="text-2xl font-light sub-title">Collections</h2>
+						<div class="mt-6 grid max-w-xs sm:max-w-none mx-auto grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
 							{collectionSignal.value.children.map((child) => (
 								<CollectionCard key={child.id} collection={child}></CollectionCard>
 							))}
@@ -136,9 +138,14 @@ export default component$(() => {
 					/>
 				)}
 				<div class="sm:col-span-5 lg:col-span-4">
-					<div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+					<div class="grid grid-cols-2  gap-y-4 gap-x-2  md:grid-cols-4 xl:gap-x-4">
 						{state.search.items.map((item) => (
 							<ProductCard
+								collection={
+									collectionSignal.value.children?.length === 0
+										? collectionSignal.value.name
+										: collectionSignal.value.children?.[subcollectioncount]?.name
+								}
 								key={item.productId}
 								productAsset={item.productAsset}
 								productName={item.productName}
