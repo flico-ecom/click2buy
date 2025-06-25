@@ -8,7 +8,7 @@ type InfiniteCarouselProps = {
 
 export const CollectionCarousel = component$<InfiniteCarouselProps>(
 	({ collections, autoplayInterval = 3000 }) => {
-		const slidesToShow = useSignal(3); // responsive: 3 (sm), 6 (md+)
+		const slidesToShow = useSignal(2); // responsive: 2 (small), 4 (medium), 6 (large)
 		const totalSlides = collections.length;
 		const current = useSignal(slidesToShow.value); // Start at first real slide (after clones)
 		const isHovered = useSignal(false);
@@ -18,11 +18,19 @@ export const CollectionCarousel = component$<InfiniteCarouselProps>(
 		const isDragging = useSignal(false);
 		const windowWidth = useSignal(1024); // default fallback
 
-		// Responsive slidesToShow
+		// Responsive slidesToShow for three window sizes
 		useVisibleTask$(() => {
 			const updateSlides = () => {
-				slidesToShow.value = window.innerWidth >= 768 ? 6 : 3;
-				windowWidth.value = window.innerWidth;
+				const width = window.innerWidth;
+				windowWidth.value = width;
+				if (width < 600) {
+					slidesToShow.value = 2;
+				} else if (width >= 600 && width < 900) {
+					slidesToShow.value = 4;
+				} else {
+					slidesToShow.value = 6;
+				}
+
 				current.value = slidesToShow.value;
 			};
 			updateSlides();
@@ -123,8 +131,17 @@ export const CollectionCarousel = component$<InfiniteCarouselProps>(
 				onMouseEnter$={() => (isHovered.value = true)}
 				onMouseLeave$={() => (isHovered.value = false)}
 			>
-				<button onClick$={prev} class="absolute left-0 z-10">
-					‹
+				<button
+					onClick$={prev}
+					class="absolute hidden sm:block left-0 top-1/2 -translate-y-1/2 z-10"
+				>
+					<img src="/assets/icons/left-chervon.png" alt="Previous" class="w-6 h-6" />
+				</button>
+				<button
+					onClick$={next}
+					class="absolute hidden sm:block right-0 top-1/2 -translate-y-1/2 z-10"
+				>
+					<img src="/assets/icons/right-chervon.png" alt="Previous" class="w-6 h-6" />
 				</button>
 				<div
 					class="flex select-none"
@@ -152,9 +169,6 @@ export const CollectionCarousel = component$<InfiniteCarouselProps>(
 						</div>
 					))}
 				</div>
-				<button onClick$={next} class="absolute right-0 z-10">
-					›
-				</button>
 			</div>
 		);
 	}

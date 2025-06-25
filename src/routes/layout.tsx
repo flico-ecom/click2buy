@@ -20,6 +20,7 @@ import { extractLang } from '~/utils/i18n';
 import Cart from '../components/cart/Cart';
 import Footer from '../components/footer/footer';
 import Header from '../components/header/header';
+import HeaderBanner from '~/components/carousel/HeaderBanner';
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
 	cacheControl({ staleWhileRevalidate: 60 * 60 * 24 * 7, maxAge: 5 });
@@ -103,6 +104,7 @@ export default component$(() => {
 
 	return (
 		<div>
+			<HeaderBanner />
 			<Header />
 			<Cart />
 			<Menu />
