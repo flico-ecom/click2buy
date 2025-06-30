@@ -83,10 +83,11 @@ export default component$<IProps>(({ onForward$ }) => {
 	useTask$(({ track }) => {
 		track(() => appState.customer);
 		track(() => appState.shippingAddress);
-		if (!appState.shippingAddress.countryCode) {
+		// Hardcode countryCode to 'LK' for Sri Lanka
+		if (appState.shippingAddress.countryCode !== 'LK') {
 			appState.shippingAddress = {
 				...appState.shippingAddress,
-				countryCode: appState.availableCountries[0].code,
+				countryCode: 'LK',
 			};
 		}
 		isFormValidSignal.value =
