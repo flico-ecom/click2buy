@@ -5,7 +5,7 @@
 		"module": "ES2020",
 		"lib": ["es2020", "DOM", "WebWorker", "DOM.Iterable"],
 		"jsx": "react-jsx",
-		"jsxImportSource": "@qwik.dev/core",
+		"jsxImportSource": "@builder.io/qwik",
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
@@ -16,7 +16,7 @@
 		"isolatedModules": true,
 		"outDir": "tmp",
 		"noEmit": true,
-		"types": ["node", "vite/client"],
+		"types": ["node", "vite/client", "@builder.io/qwik", "@builder.io/qwik-city"],
 		"paths": {
 			"~/*": ["./src/*"]
 		}

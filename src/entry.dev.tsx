@@ -1,17 +1,22 @@
-/*
+/**
  * WHAT IS THIS FILE?
  *
- * Development entry point using only client-side modules:
- * - Do not use this mode in production!
- * - No SSR
- * - No portion of the application is pre-rendered on the server.
- * - All of the application is running eagerly in the browser.
- * - More code is transferred to the browser than in SSR mode.
- * - Optimizer/Serialization/Deserialization code is not exercised!
+ * Development entry point for the client-only app.
+ *
+ * When developing the client-only app, this file is used to create the browser build.
+ *
+ * - Client-only JS/CSS build
+ * - Static assets
+ * - Public assets
+ * - Browser entry point, e.g. client.ts
+ *
  */
 import { render, type RenderOptions } from '@builder.io/qwik';
 import Root from './root';
 
+/**
+ * The default export is the QwikCity adapter used by Vite dev server.
+ */
 export default function (opts: RenderOptions) {
 	return render(document, <Root />, opts);
 }

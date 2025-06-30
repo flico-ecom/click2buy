@@ -1,4 +1,4 @@
-// import { component$, useSignal, useVisibleTask$ } from '@qwik.dev/core';
+// import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 // import { Carousel } from '@qwik-ui/headless';
 // import { Image } from 'qwik-image';
 
@@ -55,7 +55,7 @@
 // 	);
 // });
 
-import { component$, useVisibleTask$ } from '@qwik.dev/core';
+import { component$, useVisibleTask$ } from '@builder.io/qwik';
 import Swiper from 'swiper';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';

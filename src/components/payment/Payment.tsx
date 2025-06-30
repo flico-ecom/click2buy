@@ -1,4 +1,4 @@
-import { $, component$, QRL, useContext, useSignal, useVisibleTask$ } from '@qwik.dev/core';
+import { $, component$, QRL, useContext, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import MD5 from 'crypto-js/md5';
 import Swal from 'sweetalert2';
 import { APP_STATE } from '~/constants';
