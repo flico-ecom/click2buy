@@ -1,5 +1,5 @@
-import { component$, useContext, useSignal, useVisibleTask$ } from '@qwik.dev/core';
-import { useNavigate } from '@qwik.dev/router';
+import { component$, useContext, useSignal, useVisibleTask$ } from '@builder.io/qwik';
+import { useNavigate } from '@builder.io/qwik-city';
 import { Image } from 'qwik-image';
 import Price from './Price';
 import { getProductBySlug } from '~/providers/shop/products/products';

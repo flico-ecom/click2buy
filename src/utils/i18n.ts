@@ -4,7 +4,7 @@
 import { loadTranslations } from '@angular/localize';
 import '@angular/localize/init';
 import { getLocale, withLocale } from '@builder.io/qwik';
-import type { RenderOptions } from '@qwik.dev/core/server';
+import type { RenderOptions } from '@builder.io/qwik';
 import { DEFAULT_LOCALE } from '~/constants';
 import EN from '../locales/message.en.json';
 import ES from '../locales/message.es.json';
@@ -85,7 +85,8 @@ export function extractBase({ serverData }: RenderOptions): string {
 	if (import.meta.env.DEV) {
 		return '/build';
 	} else {
-		return '/build/' + serverData!.locale;
+		const locale = serverData?.locale || 'en';
+		return '/build/' + locale;
 	}
 }
 

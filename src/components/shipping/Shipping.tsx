@@ -6,7 +6,7 @@ import {
 	useSignal,
 	useTask$,
 	useVisibleTask$,
-} from '@qwik.dev/core';
+} from '@builder.io/qwik';
 import { APP_STATE, CUSTOMER_NOT_DEFINED_ID } from '~/constants';
 import { Address, CreateAddressInput, CreateCustomerInput } from '~/generated/graphql';
 import { getActiveCustomerAddressesQuery } from '~/providers/shop/customer/customer';
@@ -83,10 +83,11 @@ export default component$<IProps>(({ onForward$ }) => {
 	useTask$(({ track }) => {
 		track(() => appState.customer);
 		track(() => appState.shippingAddress);
-		if (!appState.shippingAddress.countryCode) {
+		// Hardcode countryCode to 'LK' for Sri Lanka
+		if (appState.shippingAddress.countryCode !== 'LK') {
 			appState.shippingAddress = {
 				...appState.shippingAddress,
-				countryCode: appState.availableCountries[0].code,
+				countryCode: 'LK',
 			};
 		}
 		isFormValidSignal.value =

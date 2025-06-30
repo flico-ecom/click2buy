@@ -1,5 +1,5 @@
-import { $, component$, useOnDocument, useStyles$ } from '@qwik.dev/core';
-import { QwikRouterProvider, RouterOutlet, ServiceWorkerRegister } from '@qwik.dev/router';
+import { $, component$, useOnDocument, useStyles$ } from '@builder.io/qwik';
+import { QwikCityProvider, RouterOutlet, ServiceWorkerRegister } from '@builder.io/qwik-city';
 import { Head } from './components/head/head';
 import { useToastProvider } from './components/toast/ToastContext';
 
@@ -18,12 +18,12 @@ export default component$(() => {
 	useToastProvider();
 
 	return (
-		<QwikRouterProvider>
+		<QwikCityProvider>
 			<Head />
 			<body lang="en">
 				<RouterOutlet />
 				<ServiceWorkerRegister />
 			</body>
-		</QwikRouterProvider>
+		</QwikCityProvider>
 	);
 });

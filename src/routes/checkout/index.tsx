@@ -1,5 +1,5 @@
 import { $, component$, useContext, useStore, useVisibleTask$ } from '@builder.io/qwik';
-import { useNavigate } from '@qwik.dev/router';
+import { useNavigate } from '@builder.io/qwik-city';
 import CartContents from '~/components/cart-contents/CartContents';
 import CartTotals from '~/components/cart-totals/CartTotals';
 import ChevronRightIcon from '~/components/icons/ChevronRightIcon';
@@ -34,11 +34,24 @@ export default component$(() => {
 		if (appState.activeOrder?.lines?.length === 0) {
 			navigate('/');
 		}
+		console.log('Current Active Order:', appState.activeOrder); // Debug log
 	});
 
-	const confirmPayment = $(async () => {
+	const confirmPayment = $(async (paymentMethodCode?: string) => {
 		await transitionOrderToStateMutation();
-		const activeOrder = await addPaymentToOrderMutation();
+		let activeOrder;
+		if (paymentMethodCode === 'cash-on-delivery') {
+			// For cash on delivery, we don't add a payment method via the API
+			activeOrder = appState.activeOrder; // Use the current active order
+		} else if (paymentMethodCode) {
+			// Ensure paymentMethodCode is defined for other methods
+			activeOrder = await addPaymentToOrderMutation({ method: paymentMethodCode, metadata: {} });
+		} else {
+			// Fallback or error handling if paymentMethodCode is not provided for non-cash-on-delivery
+			console.error('Payment method code is missing for non-cash-on-delivery payment.');
+			// Optionally, throw an error or handle this state appropriately
+			return; // Prevent further execution if no method is found
+		}
 		appState.activeOrder = activeOrder;
 		navigate(`/checkout/confirmation/${activeOrder.code}`);
 	});
@@ -57,21 +70,25 @@ export default component$(() => {
 							<ol class="flex space-x-4 justify-center">
 								{steps.map((step, index) => (
 									<div key={index}>
-										{(isEnvVariableEnabled('VITE_SHOW_PAYMENT_STEP') ||
-											step.state !== 'PAYMENT') && (
-											<li key={step.name} class="flex items-center">
-												<span class={`${step.state === state.step ? 'text-primary-600' : ''}`}>
-													{step.name}
-												</span>
-												{index !== steps.length - 1 ? <ChevronRightIcon /> : null}
-											</li>
-										)}
+										<li key={step.name} class="flex items-center">
+											<span class={`${step.state === state.step ? 'text-primary-600' : ''}`}>
+												{step.name}
+											</span>
+											{index !== steps.length - 1 ? <ChevronRightIcon /> : null}
+										</li>
 									</div>
 								))}
 							</ol>
 						</nav>
 						<div class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
-							<div class={state.step === 'CONFIRMATION' ? 'lg:col-span-2' : ''}>
+							{state.step !== 'CONFIRMATION' && (
+								<div class="mt-10 lg:mt-0 lg:sticky lg:top-40 lg:self-start lg:h-fit">
+									<h2 class="text-lg font-medium text-gray-900 mb-4">Order summary</h2>
+									<CartContents />
+									<CartTotals order={appState.activeOrder} />
+								</div>
+							)}
+							<div class={`${state.step === 'CONFIRMATION' ? 'lg:col-span-2' : ''} min-h-screen`}>
 								{state.step === 'SHIPPING' ? (
 									<Shipping
 										onForward$={async (
@@ -106,19 +123,13 @@ export default component$(() => {
 										}}
 									/>
 								) : state.step === 'PAYMENT' ? (
-									<Payment onForward$={confirmPayment} />
+									<Payment
+										onForward$={$(() => confirmPayment(appState.selectedPaymentMethodCode))}
+									/>
 								) : (
 									<div></div>
 								)}
 							</div>
-
-							{state.step !== 'CONFIRMATION' && (
-								<div class="mt-10 lg:mt-0">
-									<h2 class="text-lg font-medium text-gray-900 mb-4">{$localize`Order summary`}</h2>
-									<CartContents />
-									<CartTotals order={appState.activeOrder} />
-								</div>
-							)}
 						</div>
 					</div>
 				</div>
