@@ -11,7 +11,7 @@ import { Order, OrderLine } from '~/generated/graphql';
 import { addItemToOrderMutation } from '~/providers/shop/orders/order';
 import { getProductBySlug } from '~/providers/shop/products/products';
 import { Variant } from '~/types';
-import { cleanUpParams, generateDocumentHead, isEnvVariableEnabled } from '~/utils';
+import { cleanUpParams, generateDocumentHead } from '~/utils';
 import Swal from 'sweetalert2';
 import { useToast } from '~/components/toast/ToastContext';
 
@@ -72,7 +72,7 @@ export default component$(() => {
 								?.breadcrumbs ?? []
 						}
 					></Breadcrumbs>
-					<div class="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-4 md:items-start mt-4 md:mt-12">
+					<div class="md:grid md:grid-cols-3 md:gap-x-4 justify-center md:items-start mt-4 md:mt-12">
 						<div class="w-full sm:block">
 							<span class="rounded-md overflow-hidden">
 								<div class="w-full">
@@ -86,7 +86,7 @@ export default component$(() => {
 									/>
 								</div>
 								{productSignal.value.assets.length > 1 && (
-									<div class="w-full md:w-[300px] my-2 flex flex-wrap gap-3 justify-center">
+									<div class="w-full md:w-[400px] my-2 flex flex-wrap gap-3 justify-center">
 										{productSignal.value.assets.map((asset, key) => (
 											<Image
 												key={key}
@@ -108,23 +108,22 @@ export default component$(() => {
 								)}
 							</span>
 						</div>
-						<div class="mt-10 px-4 flex lg:col-span-2 gap-4 sm:px-0 sm:mt-16 lg:mt-0">
-							<div class="flex-1">
-								<div class="">
-									<h2 class="sub-title mt-0 mb-2 ">{productSignal.value.name}</h2>
-									<div class="my-2 flex items-center space-x-2 mb-2 ">
-										<span class="text-gray-600 text-xs font-medium bg-white  inline-flex items-center px-2 py-0.5 rounded ">
-											SKU : {selectedVariantSignal.value?.sku}
-										</span>
-										<StockLevelLabel stockLevel={selectedVariantSignal.value?.stockLevel} />
-									</div>
-									<h3 class="sr-only font-serif">Description</h3>
-									<div
-										class="text-sm text-gray-700"
-										dangerouslySetInnerHTML={productSignal.value.description}
-									/>
+						<div class="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
+							<div class="">
+								<h2 class="sub-title mt-0 mb-2 ">{productSignal.value.name}</h2>
+								<div class="my-2 flex items-center space-x-2 mb-2 ">
+									<span class="text-gray-600 text-xs font-medium bg-white  inline-flex items-center px-2 py-0.5 rounded ">
+										SKU : {selectedVariantSignal.value?.sku}
+									</span>
+									<StockLevelLabel stockLevel={selectedVariantSignal.value?.stockLevel} />
 								</div>
-								{/* {1 < productSignal.value.variants.length && (
+								<h3 class="sr-only font-serif">Description</h3>
+								<div
+									class="text-sm text-gray-700"
+									dangerouslySetInnerHTML={productSignal.value.description}
+								/>
+							</div>
+							{/* {1 < productSignal.value.variants.length && (
 									<div class="mt-4">
 										<label class="block text-sm font-medium text-gray-700">Select option</label>
 										<select
@@ -144,7 +143,7 @@ export default component$(() => {
 										</select>
 									</div>
 								)} */}
-								{/* <div class="mt-10 flex flex-col sm:flex-row sm:items-center">
+							{/* <div class="mt-10 flex flex-col sm:flex-row sm:items-center">
 									<Price
 										priceWithTax={selectedVariantSignal.value?.priceWithTax}
 										currencyCode={selectedVariantSignal.value?.currencyCode}
@@ -198,149 +197,148 @@ export default component$(() => {
 									</div>
 								</div> */}
 
-								{!!addItemToOrderErrorSignal.value && (
+							{!!addItemToOrderErrorSignal.value && (
+								<div class="mt-4">
+									<Alert message={addItemToOrderErrorSignal.value} />
+								</div>
+							)}
+						</div>
+						<div class="w-full p-8 border rounded-lg bg-white">
+							<div class=" py-2 flex flex-col justify-center w-full gap-4">
+								{1 < productSignal.value.variants.length && (
 									<div class="mt-4">
-										<Alert message={addItemToOrderErrorSignal.value} />
+										<label class="block text-sm font-medium text-gray-700">Select option</label>
+										<select
+											class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
+											value={selectedVariantIdSignal.value}
+											onChange$={(_, el) => (selectedVariantIdSignal.value = el.value)}
+										>
+											{productSignal.value.variants.map((variant) => (
+												<option
+													key={variant.id}
+													value={variant.id}
+													selected={selectedVariantIdSignal.value === variant.id}
+												>
+													{variant.name}
+												</option>
+											))}
+										</select>
 									</div>
 								)}
-							</div>
-							<div class="flex-1">
-								<div class=" py-2 flex flex-col gap-4">
-									{1 < productSignal.value.variants.length && (
-										<div class="mt-4">
-											<label class="block text-sm font-medium text-gray-700">Select option</label>
-											<select
-												class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
-												value={selectedVariantIdSignal.value}
-												onChange$={(_, el) => (selectedVariantIdSignal.value = el.value)}
-											>
-												{productSignal.value.variants.map((variant) => (
-													<option
-														key={variant.id}
-														value={variant.id}
-														selected={selectedVariantIdSignal.value === variant.id}
-													>
-														{variant.name}
-													</option>
-												))}
-											</select>
-										</div>
-									)}
-									<Price
-										priceWithTax={selectedVariantSignal.value?.priceWithTax}
-										currencyCode={selectedVariantSignal.value?.currencyCode}
-										variantSig={selectedVariantSignal}
-										forcedClass="text-2xl text-green-600 mr-4 "
-									></Price>
-									<div class="flex md:flex-col gap-1 align-baseline">
-										<button
-											class={{
-												'card-btn group p-1 sm:p-2 flex flex-1 bg-orange-500 text-white justify-center gap-1 md:flex-1  rounded-md transition-colors text-sm':
-													true,
-												'bg-orange-500 hover:bg-orange-600':
-													quantitySignal.value[selectedVariantIdSignal.value] === 0,
-												'bg-green-600 active:bg-green-700 hover:bg-green-700':
-													quantitySignal.value[selectedVariantIdSignal.value] >= 1 &&
-													quantitySignal.value[selectedVariantIdSignal.value] <= 7,
-												'bg-gray-600 cursor-not-allowed':
-													quantitySignal.value[selectedVariantIdSignal.value] > 7,
-											}}
-											onClick$={async () => {
-												if (quantitySignal.value[selectedVariantIdSignal.value] <= 7) {
-													const addItemToOrder = await addItemToOrderMutation(
-														selectedVariantIdSignal.value,
-														1
-													);
-
-													if (addItemToOrder.__typename !== 'Order') {
-														addItemToOrderErrorSignal.value = addItemToOrder.errorCode;
-													} else {
-														appState.activeOrder = addItemToOrder as Order;
-													}
-												}
-											}}
-										>
-											{quantitySignal.value[selectedVariantIdSignal.value] ? (
-												<span class="flex items-center">
-													<CheckIcon />
-													{$localize`${quantitySignal.value[selectedVariantIdSignal.value]} in cart`}
-												</span>
-											) : (
-												<span class="flex card-btn-span">{$localize`Add to cart`}</span>
-											)}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="20"
-												height="20"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart-plus text-white"
-											>
-												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-												<path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-												<path d="M12.5 17h-6.5v-14h-2" />
-												<path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5" />
-												<path d="M16 19h6" />
-												<path d="M19 16v6" />
-											</svg>
-										</button>
-										<button
-											onClick$={async () => {
-												if (
-													!productSignal.value ||
-													!productSignal.value.variants ||
-													productSignal.value.variants.length === 0
-												) {
-													Swal.fire({
-														title: 'Error',
-														text: 'This product is currently unavailable.',
-														icon: 'error',
-													});
-													return;
-												}
+								<Price
+									priceWithTax={selectedVariantSignal.value?.priceWithTax}
+									currencyCode={selectedVariantSignal.value?.currencyCode}
+									variantSig={selectedVariantSignal}
+									forcedClass="text-2xl text-green-600 mr-4 "
+								></Price>
+								<div class="flex md:flex-col gap-1 align-baseline">
+									<button
+										class={{
+											'card-btn group p-1 sm:p-2 flex flex-1 bg-orange-500 text-white justify-center gap-1 md:flex-1  rounded-md transition-colors text-sm':
+												true,
+											'bg-orange-500 hover:bg-orange-600':
+												quantitySignal.value[selectedVariantIdSignal.value] === 0,
+											'bg-green-600 active:bg-green-700 hover:bg-green-700':
+												quantitySignal.value[selectedVariantIdSignal.value] >= 1 &&
+												quantitySignal.value[selectedVariantIdSignal.value] <= 7,
+											'bg-gray-600 cursor-not-allowed':
+												quantitySignal.value[selectedVariantIdSignal.value] > 7,
+										}}
+										onClick$={async () => {
+											if (quantitySignal.value[selectedVariantIdSignal.value] <= 7) {
 												const addItemToOrder = await addItemToOrderMutation(
-													productSignal.value.variants[0].id,
+													selectedVariantIdSignal.value,
 													1
 												);
 
 												if (addItemToOrder.__typename !== 'Order') {
-													Swal.fire({
-														title: 'Error',
-														text: 'Failed to add product to cart. Please try again.',
-														icon: 'error',
-													});
+													addItemToOrderErrorSignal.value = addItemToOrder.errorCode;
 												} else {
 													appState.activeOrder = addItemToOrder as Order;
 												}
-												toast.value = { message: 'Navigate to checkout.!', visible: true };
-												navigate(`/checkout`);
-											}}
-											class="card-btn group p-1 sm:p-2 flex flex-1 bg-orange-500 hover:bg-blue-600 text-white items-center border border-gray-100   justify-center gap-1 md:flex-1  rounded-md transition-colors text-sm"
+											}
+										}}
+									>
+										{quantitySignal.value[selectedVariantIdSignal.value] ? (
+											<span class="flex items-center">
+												<CheckIcon />
+												{$localize`${quantitySignal.value[selectedVariantIdSignal.value]} in cart`}
+											</span>
+										) : (
+											<span class="flex card-btn-span">{$localize`Add to cart`}</span>
+										)}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="20"
+											height="20"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart-plus text-white"
 										>
-											<span class="flex card-btn-span">Buy Now</span>
+											<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+											<path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+											<path d="M12.5 17h-6.5v-14h-2" />
+											<path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5" />
+											<path d="M16 19h6" />
+											<path d="M19 16v6" />
+										</svg>
+									</button>
+									<button
+										onClick$={async () => {
+											if (
+												!productSignal.value ||
+												!productSignal.value.variants ||
+												productSignal.value.variants.length === 0
+											) {
+												Swal.fire({
+													title: 'Error',
+													text: 'This product is currently unavailable.',
+													icon: 'error',
+												});
+												return;
+											}
+											const addItemToOrder = await addItemToOrderMutation(
+												productSignal.value.variants[0].id,
+												1
+											);
 
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="20"
-												height="20"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												class="icon icon-tabler icons-tabler-outline icon-tabler-wallet"
-											>
-												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-												<path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
-												<path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
-											</svg>
-										</button>
-									</div>
+											if (addItemToOrder.__typename !== 'Order') {
+												Swal.fire({
+													title: 'Error',
+													text: 'Failed to add product to cart. Please try again.',
+													icon: 'error',
+												});
+											} else {
+												appState.activeOrder = addItemToOrder as Order;
+											}
+											toast.value = { message: 'Navigate to checkout.!', visible: true };
+											navigate(`/checkout`);
+										}}
+										class="card-btn group p-1 sm:p-2 flex flex-1 bg-orange-500 hover:bg-blue-600 text-white items-center border border-gray-100   justify-center gap-1 md:flex-1  rounded-md transition-colors text-sm"
+									>
+										<span class="flex card-btn-span">Buy Now</span>
+
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="20"
+											height="20"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class="icon icon-tabler icons-tabler-outline icon-tabler-wallet"
+										>
+											<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+											<path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
+											<path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
+										</svg>
+									</button>
 								</div>
 							</div>
 						</div>
@@ -349,7 +347,7 @@ export default component$(() => {
 			</div>
 
 			{/* Product Tabs Section */}
-			<div class="max-w-6xl mx-auto px-4 py-10">
+			<div class="max-w-6xl  mx-auto px-4 py-10">
 				<div class="mt-4  pb-12 border-b ">
 					{/* Tab Navigation */}
 					<div class="border-b border-gray-200">
