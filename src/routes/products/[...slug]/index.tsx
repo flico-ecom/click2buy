@@ -318,7 +318,7 @@ export default component$(() => {
 											toast.value = { message: 'Navigate to checkout.!', visible: true };
 											navigate(`/checkout`);
 										}}
-										class="card-btn group p-1 sm:p-2 flex flex-1 bg-orange-500 hover:bg-blue-600 text-white items-center border border-gray-100   justify-center gap-1 md:flex-1  rounded-md transition-colors text-sm"
+										class="card-btn group p-1 sm:p-2 flex flex-1 bg-orange-500 hover:bg-green-600 text-white items-center border border-gray-100   justify-center gap-1 md:flex-1  rounded-md transition-colors text-sm"
 									>
 										<span class="flex card-btn-span">Buy Now</span>
 
