@@ -140,15 +140,17 @@ export default component$(() => {
 					<div class="flex-1 flex ">
 						<div class="grid grid-cols-2  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-3 product-fade">
 							{products.slice(0, 4).map((item) => (
-								<TopSellingProductCard
-									collection={'Recommended'}
-									key={item.productId}
-									productAsset={item.productAsset}
-									productName={item.productName}
-									slug={item.slug}
-									priceWithTax={item.priceWithTax}
-									currencyCode={item.currencyCode}
-								></TopSellingProductCard>
+								<div>
+									<TopSellingProductCard
+										collection={'Recommended'}
+										key={item.productId}
+										productAsset={item.productAsset}
+										productName={item.productName}
+										slug={item.slug}
+										priceWithTax={item.priceWithTax}
+										currencyCode={item.currencyCode}
+									></TopSellingProductCard>
+								</div>
 							))}
 						</div>
 					</div>
