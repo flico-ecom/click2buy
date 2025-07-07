@@ -17,6 +17,14 @@ export const searchQueryWithTerm = async (
 	facetValueIds: string[]
 ) => search({ collectionSlug, term, facetValueFilters: [{ or: facetValueIds }] });
 
+export const searchAllProducts = async (facetValueIds?: string[]) => {
+	const searchInput: SearchInput = { groupByProduct: true };
+	if (facetValueIds && facetValueIds.length > 0) {
+		searchInput.facetValueFilters = [{ or: facetValueIds }];
+	}
+	return search(searchInput);
+};
+
 export const getProductBySlug = async (slug: string) => {
 	return shopSdk.product({ slug }).then((res: ProductQuery) => res.product as Product);
 };

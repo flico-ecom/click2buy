@@ -18,6 +18,19 @@ export const CollectionCarousel = component$<InfiniteCarouselProps>(
 		const isDragging = useSignal(false);
 		const windowWidth = useSignal(1024); // default fallback
 
+		if (collections.length <= slidesToShow.value) {
+			// Just show all items in a row, no carousel logic
+			return (
+				<div class="w-full flex items-center justify-center gap-2">
+					{collections.map((collection) => (
+						<div class="min-w-0" key={collection.id}>
+							<CollectionCardRound collection={collection} />
+						</div>
+					))}
+				</div>
+			);
+		}
+
 		// Responsive slidesToShow for three window sizes
 		useVisibleTask$(() => {
 			const updateSlides = () => {
@@ -135,7 +148,11 @@ export const CollectionCarousel = component$<InfiniteCarouselProps>(
 					onClick$={prev}
 					class="absolute hidden sm:block left-0 top-1/2 -translate-y-1/2 z-10"
 				>
-					<img src="/assets/icons/left-chervon.png" alt="Previous" class="w-6 h-6" />
+					<img
+						src="/assets/icons/left-chervon.png"
+						alt="Previous"
+						class="w-6 h-6 hidden sm:block"
+					/>
 				</button>
 				<button
 					onClick$={next}

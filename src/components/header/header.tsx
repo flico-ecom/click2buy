@@ -195,7 +195,7 @@ export default component$(() => {
 									All Categories
 								</button>
 							</div>
-							<a href="/shop/electronics" class="text-white text-sm">
+							<a href="/all-products" class="text-white text-sm">
 								Offers
 							</a>
 
