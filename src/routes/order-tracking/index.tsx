@@ -1,9 +1,7 @@
 import { $, component$, useSignal } from '@builder.io/qwik';
-import { useNavigate } from '@builder.io/qwik-city';
 import XCircleIcon from '~/components/icons/XCircleIcon';
 
 export default component$(() => {
-	const navigate = useNavigate();
 	const trackingNumber = useSignal('');
 	const error = useSignal('');
 	const message = useSignal('');

@@ -134,9 +134,9 @@ export default component$(() => {
 																	? '/account'
 																	: '/sign-in'
 															}
-															class="block items-center justify-center px-2 py-2 text-sm text-gray-700 hover:bg-gray-100"
+															class="flex justify-center px-2 py-2 text-sm text-gray-700 hover:bg-gray-100"
 														>
-															<div>
+															<div class="w-max">
 																{appState.customer.id !== CUSTOMER_NOT_DEFINED_ID
 																	? $localize`My Account`
 																	: $localize`Sign In`}
@@ -145,7 +145,7 @@ export default component$(() => {
 														{appState.customer.id !== CUSTOMER_NOT_DEFINED_ID && (
 															<span
 																onClick$={logout}
-																class="block px-2 py-2 text-sm text-gray-700 hover:bg-gray-100"
+																class=" px-2 py-2 text-sm text-gray-700 hover:bg-gray-100"
 															>
 																<div class="flex items-center justify-center gap-1 text-sm cursor-pointer">
 																	<div>{$localize`Logout`}</div>
@@ -167,7 +167,7 @@ export default component$(() => {
 																</div>
 															</span>
 														)}
-														<a href={`/order-tracking`} class="block sm:hidden ">
+														<a href={`/order-tracking`} class=" sm:hidden ">
 															<div class="flex sm:hidden items-center justify-center p-2 w-max text-gray-700 text-sm hover:bg-gray-100">
 																<svg
 																	xmlns="http://www.w3.org/2000/svg"
@@ -179,7 +179,7 @@ export default component$(() => {
 																	stroke-width="2"
 																	stroke-linecap="round"
 																	stroke-linejoin="round"
-																	class="h-8 w-8"
+																	class="h-6 w-6"
 																	aria-hidden="true"
 																>
 																	<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
