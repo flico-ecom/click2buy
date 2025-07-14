@@ -32,7 +32,7 @@ export default component$(() => {
 
 			<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
 				<div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-					<div class="mb-6 bg-yellow-50 border border-yellow-400 text-yellow-800 rounded p-4 text-center text-sm">
+					{/* <div class="mb-6 bg-yellow-50 border border-yellow-400 text-yellow-800 rounded p-4 text-center text-sm">
 						<p>Demo credentials</p>
 						<p>
 							Email address: <span class="font-bold">test@vendure.io</span>
@@ -40,7 +40,7 @@ export default component$(() => {
 						<p>
 							Password: <span class="font-bold">test</span>
 						</p>
-					</div>
+					</div> */}
 					<div class="space-y-6">
 						<div>
 							<label class="block text-sm font-medium text-gray-700">Email address</label>
@@ -102,9 +102,6 @@ export default component$(() => {
 										<XCircleIcon />
 									</div>
 									<div class="ml-3">
-										<h3 class="text-sm font-medium text-red-800">
-											We ran into a problem signing you in!
-										</h3>
 										<p class="text-sm text-red-700 mt-2">{error.value}</p>
 									</div>
 								</div>

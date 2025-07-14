@@ -105,10 +105,9 @@ export default component$(() => {
 					</div>
 					<div class="flex-1 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-3 fade-in min-h-[400px]">
 						{products.slice(0, 8).map((item) => (
-							<div>
+							<div key={item.productId}>
 								<ProductCard
 									collection={'Recommended'}
-									key={item.productId}
 									productAsset={item.productAsset}
 									productName={item.productName}
 									slug={item.slug}

@@ -123,10 +123,10 @@ export default component$(() => {
 										{isAccountOpen.value && (
 											<>
 												<div
-													class="fixed inset-0 z-40 bg-transparent"
+													class="fixed inset-0  z-40 bg-transparent"
 													onClick$={() => (isAccountOpen.value = false)}
 												/>
-												<div class="absolute right-0 z-50 top-[90%] min-w-24 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+												<div class="absolute right-0 z-50 top-[90%]  mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 													<div class="py-1">
 														<a
 															href={
@@ -134,9 +134,9 @@ export default component$(() => {
 																	? '/account'
 																	: '/sign-in'
 															}
-															class="block text-right px-2 py-2 text-sm text-gray-700 hover:bg-gray-100"
+															class="flex justify-center px-2 py-2 text-sm text-gray-700 hover:bg-gray-100"
 														>
-															<div>
+															<div class="w-max">
 																{appState.customer.id !== CUSTOMER_NOT_DEFINED_ID
 																	? $localize`My Account`
 																	: $localize`Sign In`}
@@ -145,9 +145,9 @@ export default component$(() => {
 														{appState.customer.id !== CUSTOMER_NOT_DEFINED_ID && (
 															<span
 																onClick$={logout}
-																class="block px-2 py-2 text-sm text-gray-700 hover:bg-gray-100"
+																class=" px-2 py-2 text-sm text-gray-700 hover:bg-gray-100"
 															>
-																<div class="flex items-center justify-end gap-1 text-sm cursor-pointer">
+																<div class="flex items-center justify-center gap-1 text-sm cursor-pointer">
 																	<div>{$localize`Logout`}</div>
 																	<svg
 																		fill="none"
@@ -167,6 +167,27 @@ export default component$(() => {
 																</div>
 															</span>
 														)}
+														<a href={`/order-tracking`} class=" sm:hidden ">
+															<div class="flex sm:hidden items-center justify-center p-2 w-max text-gray-700 text-sm hover:bg-gray-100">
+																<svg
+																	xmlns="http://www.w3.org/2000/svg"
+																	width="30"
+																	height="30"
+																	viewBox="0 0 30 30"
+																	fill="none"
+																	stroke="currentColor"
+																	stroke-width="2"
+																	stroke-linecap="round"
+																	stroke-linejoin="round"
+																	class="h-6 w-6"
+																	aria-hidden="true"
+																>
+																	<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+																	<circle cx="12" cy="9" r="2.5" />
+																</svg>
+																Track your order
+															</div>
+														</a>
 													</div>
 												</div>
 											</>
@@ -219,50 +240,52 @@ export default component$(() => {
 					<div class="flex-grow flex md:hidden max-w-xs sm:max-w-none md:ml-auto justify-center">
 						<SearchBar />
 					</div>
-					<div class="md:flex hidden ">
-						<div class="flex justify-end items-center  text-white gap-5 ">
-							<div class="flex items-center justify-center text-white text-sm">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="20"
-									height="20"
-									viewBox="0 0 24 24"
-									fill="none"
+					<div class="md:flex hidden gap-3 ">
+						<a href={`/order-tracking`} class="flex items-center justify-center text-white text-sm">
+							{/* <a
+									class="flex "
+									
+								> */}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="h-4 w-4"
+								aria-hidden="true"
+							>
+								<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+								<circle cx="12" cy="9" r="2.5" />
+							</svg>
+							&nbsp; Track your order
+						</a>
+						<a href="tel:+94712464646" class="flex items-center justify-center text-white text-sm">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="h-4 w-4 "
+								aria-hidden="true"
+							>
+								<path
+									d="M22 16.92v3a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.81.37 1.6.72 2.34a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c.74.35 1.53.59 2.34.72A2 2 0 0 1 22 16.92z"
 									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									class="h-4 w-4"
-									aria-hidden="true"
-								>
-									<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-									<circle cx="12" cy="9" r="2.5" />
-								</svg>
-								Track your order
-							</div>
-							<div class="flex items-center justify-center text-white text-sm">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									class="h-4 w-4 "
-									aria-hidden="true"
-								>
-									<path
-										d="M22 16.92v3a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.81.37 1.6.72 2.34a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c.74.35 1.53.59 2.34.72A2 2 0 0 1 22 16.92z"
-										stroke="currentColor"
-										fill=""
-									/>
-								</svg>
-								+9471 2 46 46 46
-							</div>
-						</div>
+									fill=""
+								/>
+							</svg>{' '}
+							&nbsp; +94 71 2 46 46 46
+						</a>
 					</div>
 					<div class="ml-4 md:hidden">
 						<button
