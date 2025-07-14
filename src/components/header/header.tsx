@@ -123,10 +123,10 @@ export default component$(() => {
 										{isAccountOpen.value && (
 											<>
 												<div
-													class="fixed inset-0 z-40 bg-transparent"
+													class="fixed inset-0  z-40 bg-transparent"
 													onClick$={() => (isAccountOpen.value = false)}
 												/>
-												<div class="absolute right-0 z-50 top-[90%] min-w-24 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+												<div class="absolute right-0 z-50 top-[90%]  mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 													<div class="py-1">
 														<a
 															href={
@@ -167,6 +167,27 @@ export default component$(() => {
 																</div>
 															</span>
 														)}
+														<a href={`/order-tracking`} class="block sm:hidden ">
+															<div class="flex sm:hidden items-center justify-center p-2 w-max text-gray-700 text-sm hover:bg-gray-100">
+																<svg
+																	xmlns="http://www.w3.org/2000/svg"
+																	width="30"
+																	height="30"
+																	viewBox="0 0 30 30"
+																	fill="none"
+																	stroke="currentColor"
+																	stroke-width="2"
+																	stroke-linecap="round"
+																	stroke-linejoin="round"
+																	class="h-8 w-8"
+																	aria-hidden="true"
+																>
+																	<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+																	<circle cx="12" cy="9" r="2.5" />
+																</svg>
+																Track your order
+															</div>
+														</a>
 													</div>
 												</div>
 											</>
