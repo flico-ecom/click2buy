@@ -180,3 +180,12 @@ export const generateDocumentHead = (
 	];
 	return { title, meta: [...OG_METATAGS, ...TWITTER_METATAGS] };
 };
+
+/**
+ * Splits a product description HTML string by <hr> tags (any of <hr>, <hr/>, <hr />) and returns an array of HTML strings.
+ */
+export function splitDescriptionByHr(description: string): string[] {
+	if (!description) return [];
+	// Split on <hr>, <hr/>, <hr /> (case-insensitive, allow whitespace)
+	return description.split(/<hr\s*\/?>/i);
+}

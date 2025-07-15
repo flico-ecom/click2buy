@@ -12,6 +12,7 @@ import { addItemToOrderMutation } from '~/providers/shop/orders/order';
 import { getProductBySlug } from '~/providers/shop/products/products';
 import { Variant } from '~/types';
 import { cleanUpParams, generateDocumentHead } from '~/utils';
+import { splitDescriptionByHr } from '~/utils';
 import Swal from 'sweetalert2';
 import { useToast } from '~/components/toast/ToastContext';
 
@@ -118,10 +119,23 @@ export default component$(() => {
 									<StockLevelLabel stockLevel={selectedVariantSignal.value?.stockLevel} />
 								</div>
 								<h3 class="sr-only font-serif">Description</h3>
-								<div
+								{splitDescriptionByHr(productSignal.value.description)[0] ? (
+									<div
+										class="text-sm text-gray-700"
+										dangerouslySetInnerHTML={
+											splitDescriptionByHr(productSignal.value.description)[0]
+										}
+									/>
+								) : (
+									<div
+										class="text-sm text-gray-700"
+										dangerouslySetInnerHTML={productSignal.value.description}
+									/>
+								)}
+								{/* <div
 									class="text-sm text-gray-700"
-									dangerouslySetInnerHTML={productSignal.value.description}
-								/>
+									dangerouslySetInnerHTML={splitDescriptionByHr(productSignal.value.description)[0]}
+								/> */}
 							</div>
 							{/* {1 < productSignal.value.variants.length && (
 									<div class="mt-4">
@@ -206,30 +220,48 @@ export default component$(() => {
 						<div class="w-full p-8 border rounded-lg bg-white">
 							<div class=" py-2 flex flex-col justify-center w-full gap-4">
 								{1 < productSignal.value.variants.length && (
-									<div class="mt-4">
-										<label class="block text-sm font-medium text-gray-700">Select option</label>
-										<select
-											class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
-											value={selectedVariantIdSignal.value}
-											onChange$={(_, el) => (selectedVariantIdSignal.value = el.value)}
-										>
-											{productSignal.value.variants.map((variant) => (
-												<option
-													key={variant.id}
+									// <div class="mt-4">
+									// 	<label class="block text-sm font-medium text-gray-700">Select option</label>
+									// 	<select
+									// 		class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
+									// 		value={selectedVariantIdSignal.value}
+									// 		onChange$={(_, el) => (selectedVariantIdSignal.value = el.value)}
+									// 	>
+									// 		{productSignal.value.variants.map((variant) => (
+									// 			<option
+									// 				key={variant.id}
+									// 				value={variant.id}
+									// 				selected={selectedVariantIdSignal.value === variant.id}
+									// 			>
+									// 				{variant.name}
+									// 			</option>
+									// 		))}
+									// 	</select>
+									// </div>
+									<div class="mt-1 space-y-2">
+										{productSignal.value.variants.map((variant) => (
+											<label
+												key={variant.id}
+												class="flex items-center space-x-2 border p-2 rounded-md cursor-pointer hover:bg-gray-50"
+											>
+												<input
+													type="radio"
+													name="variant"
 													value={variant.id}
-													selected={selectedVariantIdSignal.value === variant.id}
-												>
-													{variant.name}
-												</option>
-											))}
-										</select>
+													checked={selectedVariantIdSignal.value === variant.id}
+													onChange$={() => (selectedVariantIdSignal.value = variant.id)}
+													class="text-primary-500"
+												/>
+												<span>{variant.name}</span>
+											</label>
+										))}
 									</div>
 								)}
 								<Price
 									priceWithTax={selectedVariantSignal.value?.priceWithTax}
 									currencyCode={selectedVariantSignal.value?.currencyCode}
 									variantSig={selectedVariantSignal}
-									forcedClass="text-2xl text-green-600 mr-4 "
+									forcedClass="text-xl text-green-600 mr-4 "
 								></Price>
 								<div class="flex md:flex-col gap-1 align-baseline">
 									<button
@@ -383,40 +415,52 @@ export default component$(() => {
 					<div class="bg-white p-4">
 						{activeTabSignal.value === 'description' && (
 							<div class="text-base text-gray-700">
-								<div dangerouslySetInnerHTML={productSignal.value.description} />
+								<div
+									class="text-sm text-gray-700"
+									dangerouslySetInnerHTML={
+										splitDescriptionByHr(productSignal.value.description)[0] +
+										splitDescriptionByHr(productSignal.value.description)[1]
+									}
+								/>
 							</div>
 						)}
 
 						{activeTabSignal.value === 'specifications' && (
 							<div class="text-base text-gray-700">
-								<div class="space-y-4">
-									<div class="grid grid-cols-1">
-										<div>
-											<h4 class="font-medium text-gray-900 mb-2">{$localize`Product Details`}</h4>
-											<dl class="space-y-2">
-												<div class="flex justify-between">
-													<dt class="text-gray-500">{$localize`SKU`}:</dt>
-													<dd class="text-gray-900">{selectedVariantSignal.value?.sku}</dd>
-												</div>
-												<div class="flex justify-between">
-													<dt class="text-gray-500">{$localize`Stock Level`}:</dt>
-													<dd class="text-gray-900">
-														<StockLevelLabel stockLevel={selectedVariantSignal.value?.stockLevel} />
-													</dd>
-												</div>
-												{selectedVariantSignal.value?.facetValues &&
-													selectedVariantSignal.value.facetValues.length > 0 &&
-													selectedVariantSignal.value.facetValues.map((facetValue) => (
-														<div key={facetValue.id} class="flex justify-between">
-															<dt class="text-gray-500">{facetValue.facet.name}:</dt>
-															<dd class="text-gray-900">{facetValue.name}</dd>
-														</div>
-													))}
-											</dl>
-										</div>
-									</div>
-								</div>
+								<div
+									class="text-sm text-gray-700"
+									dangerouslySetInnerHTML={splitDescriptionByHr(productSignal.value.description)[2]}
+								/>
 							</div>
+							// <div class="text-base text-gray-700">
+							// 	<div class="space-y-4">
+							// 		<div class="grid grid-cols-1">
+							// 			<div>
+							// 				<h4 class="font-medium text-gray-900 mb-2">{$localize`Product Details`}</h4>
+							// 				<dl class="space-y-2">
+							// 					<div class="flex justify-between">
+							// 						<dt class="text-gray-500">{$localize`SKU`}:</dt>
+							// 						<dd class="text-gray-900">{selectedVariantSignal.value?.sku}</dd>
+							// 					</div>
+							// 					<div class="flex justify-between">
+							// 						<dt class="text-gray-500">{$localize`Stock Level`}:</dt>
+							// 						<dd class="text-gray-900">
+							// 							<StockLevelLabel stockLevel={selectedVariantSignal.value?.stockLevel} />
+							// 						</dd>
+							// 					</div>
+							// 					{selectedVariantSignal.value?.facetValues &&
+							// 						selectedVariantSignal.value.facetValues.length > 0 &&
+							// 						selectedVariantSignal.value.facetValues.map((facetValue) => (
+							// 							<div key={facetValue.id} class="flex justify-between">
+							// 								<dt class="text-gray-500">{facetValue.facet.name}:</dt>
+							// 								<dd class="text-gray-900">{facetValue.name}</dd>
+							// 							</div>
+							// 						))}
+							// 				</dl>
+							// 			</div>
+							// 		</div>
+							// 	</div>
+							// </div>
 						)}
 					</div>
 				</div>

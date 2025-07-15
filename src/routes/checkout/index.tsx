@@ -34,7 +34,7 @@ export default component$(() => {
 		if (appState.activeOrder?.lines?.length === 0) {
 			navigate('/');
 		}
-		console.log('Current Active Order:', appState.activeOrder); // Debug log
+		// console.log('Current Active Order:', appState.activeOrder); // Debug log
 	});
 
 	const confirmPayment = $(async (paymentMethodCode?: string) => {
