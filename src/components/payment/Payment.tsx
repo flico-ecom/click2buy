@@ -24,7 +24,7 @@ export default component$<{ onForward$: QRL<(paymentMethodCode?: string) => void
 
 				// Payment completed. It can be a successful failure.
 				window.payhere.onCompleted = async function onCompleted(orderId: string) {
-					// console.log('PayHere popup completed. Received Order ID:', orderId);
+					console.log('PayHere popup completed. Received Order ID:', orderId);
 					// As per PayHere documentation, this callback triggers for both successful and failed payments.
 					// The definitive payment status verification (using md5sig and status_code) must occur on the backend
 					// via the 'notify_url' or after redirection to the 'return_url'.
@@ -41,7 +41,7 @@ export default component$<{ onForward$: QRL<(paymentMethodCode?: string) => void
 
 				// Error occurred
 				window.payhere.onError = function onError(error: string) {
-					// console.error('PayHere Error Callback Triggered:', error); // More prominent error log
+					console.error('PayHere Error Callback Triggered:', error); // More prominent error log
 				};
 			}
 		});

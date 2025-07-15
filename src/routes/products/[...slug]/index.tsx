@@ -263,6 +263,31 @@ export default component$(() => {
 									variantSig={selectedVariantSignal}
 									forcedClass="text-xl text-green-600 mr-4 "
 								></Price>
+
+								<div class="flex items-center">
+									<div class="flex space-x-2">
+										<div class="">
+											<Image
+												src="/assets/svg/visa.svg"
+												alt="Apple Pay"
+												width={30}
+												height={20}
+												class="h-5 w-auto"
+												layout="constrained"
+											/>
+										</div>
+										<div>
+											<Image
+												src="/assets/svg/mastercard.svg"
+												alt="Visa"
+												width={30}
+												height={20}
+												class="h-5 w-auto"
+												layout="constrained"
+											/>
+										</div>
+									</div>
+								</div>
 								<div class="flex md:flex-col gap-1 align-baseline">
 									<button
 										class={{
