@@ -15,7 +15,7 @@ export default component$<{ onForward$: QRL<(paymentMethodCode?: string) => void
 
 		useVisibleTask$(async () => {
 			paymentMethods.value = await getEligiblePaymentMethodsQuery();
-			console.log('Eligible Payment Methods:', paymentMethods.value); // Debug log
+			// console.log('Eligible Payment Methods:', paymentMethods.value); // Debug log
 
 			// Initialize PayHere
 			if (typeof window !== 'undefined' && window.payhere) {
@@ -36,7 +36,7 @@ export default component$<{ onForward$: QRL<(paymentMethodCode?: string) => void
 				// Payment window closed
 				window.payhere.onDismissed = function onDismissed() {
 					// Note: Prompt user to pay again or show an error page
-					console.log('Payment dismissed');
+					// console.log('Payment dismissed');
 				};
 
 				// Error occurred
@@ -53,13 +53,13 @@ export default component$<{ onForward$: QRL<(paymentMethodCode?: string) => void
 		});
 
 		const handlePayClick = $(async () => {
-			console.log('handlePayClick initiated.'); // Debug log
+			// console.log('handlePayClick initiated.'); // Debug log
 			if (!appState.selectedPaymentMethodCode) {
-				console.log('No payment method selected.'); // Debug log
+				// console.log('No payment method selected.'); // Debug log
 				return;
 			}
 
-			console.log('Selected payment method:', appState.selectedPaymentMethodCode); // Debug log
+			// console.log('Selected payment method:', appState.selectedPaymentMethodCode); // Debug log
 
 			if (appState.selectedPaymentMethodCode === 'cash-on-delivery') {
 				Swal.fire({
@@ -73,12 +73,12 @@ export default component$<{ onForward$: QRL<(paymentMethodCode?: string) => void
 				}).then((result) => {
 					if (result.isConfirmed) {
 						// Simulate order placement and then navigate
-						console.log('Paying with:', appState.selectedPaymentMethodCode);
+						// console.log('Paying with:', appState.selectedPaymentMethodCode);
 						onForward$('cash-on-delivery');
 					}
 				});
 			} else if (appState.selectedPaymentMethodCode === 'payhere') {
-				console.log('Initiating PayHere payment...'); // Debug log
+				// console.log('Initiating PayHere payment...'); // Debug log
 
 				// PayHere payment
 				const orderId = appState.activeOrder?.code || 'N/A';
@@ -136,12 +136,12 @@ export default component$<{ onForward$: QRL<(paymentMethodCode?: string) => void
 					hash: hash,
 				};
 
-				console.log('PayHere payment object:', payment); // Debug log before starting payment
+				// console.log('PayHere payment object:', payment); // Debug log before starting payment
 
 				window.payhere.startPayment(payment);
 			} else {
 				// For other payment methods, proceed as usual
-				console.log('Paying with:', appState.selectedPaymentMethodCode);
+				// console.log('Paying with:', appState.selectedPaymentMethodCode);
 				onForward$();
 			}
 		});

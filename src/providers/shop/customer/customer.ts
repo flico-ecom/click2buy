@@ -58,7 +58,7 @@ export const updateCustomerAddressMutation = async (
 	input: UpdateAddressInput,
 	token: string | undefined
 ) => {
-	console.log(token);
+	// console.log(token);
 	return shopSdk.updateCustomerAddressMutation({ input }, { token });
 };
 

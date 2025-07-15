@@ -28,7 +28,7 @@ async function getFilesRecursively(dir: string): Promise<string[]> {
  */
 async function sortTranslations(file: string, valueOrder?: string[], keyOrder?: string[]) {
 	const locale = file.match(/\.(.*)\./)![1];
-	console.log(`sorting ${locale}`);
+	// console.log(`sorting ${locale}`);
 
 	const text = await readFile(file, { encoding: 'utf-8' });
 
