@@ -1,8 +1,6 @@
 import { $, component$, QRL, useContext, useSignal, useVisibleTask$ } from '@builder.io/qwik';
-import MD5 from 'crypto-js/md5';
 import Swal from 'sweetalert2';
 import { APP_STATE } from '~/constants';
-import { ENV_VARIABLES } from '~/env';
 import { getEligiblePaymentMethodsQuery } from '~/providers/shop/checkout/checkout';
 import { EligiblePaymentMethods } from '~/types';
 import { Button } from '../buttons/Button';
@@ -63,7 +61,7 @@ export default component$<{ onForward$: QRL<(paymentMethodCode?: string) => void
 				console.log('Initiating Card payment...'); // Debug log
 
 				// Card payment
-				const orderId = appState.activeOrder?.code || 'N/A';
+				// const orderId = appState.activeOrder?.code || 'N/A';
 				const totalWithTax = appState.activeOrder?.totalWithTax;
 
 				if (typeof totalWithTax !== 'number' || isNaN(totalWithTax)) {
@@ -77,8 +75,8 @@ export default component$<{ onForward$: QRL<(paymentMethodCode?: string) => void
 					return;
 				}
 
-				const amount = (totalWithTax / 100)?.toFixed(2) || '0.00'; // Convert from cents to LKR and format
-				const currency = appState.activeOrder?.currencyCode || 'LKR';
+				// const amount = (totalWithTax / 100)?.toFixed(2) || '0.00'; // Convert from cents to LKR and format
+				// const currency = appState.activeOrder?.currencyCode || 'LKR';
 				const API_URL = 'https://c2b-pay.coolify.flico.lk/api/paycenter';
 
 				// TODO: Replace with dynamic data after testing
