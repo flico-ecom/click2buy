@@ -1,10 +1,12 @@
-import { $, component$, useOnDocument, useStyles$ } from '@builder.io/qwik';
+import { $, component$, useOnDocument, useStyles$, useVisibleTask$ } from '@builder.io/qwik';
 import { QwikCityProvider, RouterOutlet, ServiceWorkerRegister } from '@builder.io/qwik-city';
 import { Head } from './components/head/head';
 import { useToastProvider } from './components/toast/ToastContext';
 
 import globalStyles from './global.css?inline';
 import { useI18n } from './utils/i18n';
+
+const chatbotUrl = import.meta.env.VITE_CHAT_WEBHOOK_URL;
 
 export default component$(() => {
 	/**
@@ -16,6 +18,40 @@ export default component$(() => {
 	useStyles$(globalStyles);
 	useOnDocument('qinit', $(useI18n));
 	useToastProvider();
+	useVisibleTask$(() => {
+		// Attach the config to window
+		(window as any).ChatWidgetConfig = {
+			webhook: { url: chatbotUrl, route: 'general' },
+			branding: {
+				logo: `/Favicon.ico`,
+				name: 'Click2buy Ai Assistant',
+				welcomeText: 'Welcome to Click2buy.lk! How can we help you today?',
+				responseTimeText: 'Click the button below to start chatting with our support team',
+			},
+			style: {
+				primaryColor: '#262261', // Purple/violet to match your header
+				secondaryColor: '#4f46e5', // Darker purple for hover states
+				accentColor: '#f97316', // Orange to match your promotional banner
+				position: 'right',
+				backgroundColor: '#ffffff',
+				fontColor: '#1e293b', // Dark slate for better readability
+				headerColor: '#6366f1', // Purple header
+				headerTextColor: '#ffffff', // White text on purple header
+			},
+			// Add suggested questions that users can click
+			suggestedQuestions: [
+				'How can I track my order?',
+				'What are your delivery options?',
+				'How do I return an item?',
+				'What payment methods do you accept?',
+			],
+		};
+
+		// Inject script dynamically
+		const script = document.createElement('script');
+		script.src = 'https://cdn.jsdelivr.net/gh/funtastic418/chat-widget@main/chat-widget.js';
+		document.body.appendChild(script);
+	});
 
 	return (
 		<QwikCityProvider>
