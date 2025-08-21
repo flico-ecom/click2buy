@@ -8,6 +8,7 @@ import { APP_STATE } from '~/constants';
 
 export default component$(() => {
 	const collections = useContext(APP_STATE).collections;
+
 	return (
 		<div class="xl:max-w-7xl xl:mx-auto xl:px-8">
 			<Hero />
