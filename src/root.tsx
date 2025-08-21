@@ -23,7 +23,7 @@ export default component$(() => {
 		(window as any).ChatWidgetConfig = {
 			webhook: { url: chatbotUrl, route: 'general' },
 			branding: {
-				logo: `/Favicon.ico`,
+				logo: `/logo.svg`,
 				name: 'Click2buy Ai Assistant',
 				welcomeText: 'Welcome to Click2buy.lk! How can we help you today?',
 				responseTimeText: 'Click the button below to start chatting with our support team',
