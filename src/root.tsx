@@ -40,12 +40,7 @@ export default component$(() => {
 				headerTextColor: '#ffffff', // White text on purple header
 			},
 			// Add suggested questions that users can click
-			suggestedQuestions: [
-				'I want to buy a Laptop?',
-				'What are your delivery options?',
-				'What are the new Phones ?',
-				'Ai Powered washing machine ?',
-			],
+			suggestedQuestions: ['I am looking for...?'],
 		};
 
 		// Inject script dynamically
