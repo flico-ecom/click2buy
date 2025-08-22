@@ -2915,6 +2915,7 @@ export type ProvinceList = PaginatedList & {
 export type PublicPaymentMethod = {
 	__typename?: 'PublicPaymentMethod';
 	code: Scalars['String']['output'];
+	customFields?: Maybe<Scalars['JSON']['output']>;
 	description?: Maybe<Scalars['String']['output']>;
 	id: Scalars['ID']['output'];
 	name: Scalars['String']['output'];
@@ -2924,6 +2925,7 @@ export type PublicPaymentMethod = {
 export type PublicShippingMethod = {
 	__typename?: 'PublicShippingMethod';
 	code: Scalars['String']['output'];
+	customFields?: Maybe<Scalars['JSON']['output']>;
 	description?: Maybe<Scalars['String']['output']>;
 	id: Scalars['ID']['output'];
 	name: Scalars['String']['output'];
@@ -3152,6 +3154,7 @@ export type SearchInput = {
 	collectionSlug?: InputMaybe<Scalars['String']['input']>;
 	facetValueFilters?: InputMaybe<Array<FacetValueFilterInput>>;
 	groupByProduct?: InputMaybe<Scalars['Boolean']['input']>;
+	inStock?: InputMaybe<Scalars['Boolean']['input']>;
 	skip?: InputMaybe<Scalars['Int']['input']>;
 	sort?: InputMaybe<SearchResultSortParameter>;
 	take?: InputMaybe<Scalars['Int']['input']>;
@@ -3165,22 +3168,10 @@ export type SearchReindexResponse = {
 
 export type SearchResponse = {
 	__typename?: 'SearchResponse';
-	cacheIdentifier?: Maybe<SearchResponseCacheIdentifier>;
 	collections: Array<CollectionResult>;
 	facetValues: Array<FacetValueResult>;
 	items: Array<SearchResult>;
 	totalItems: Scalars['Int']['output'];
-};
-
-/**
- * This type is here to allow us to easily purge the Stellate cache
- * of any search results where the collectionSlug is used. We cannot rely on
- * simply purging the SearchResult type, because in the case of an empty 'items'
- * array, Stellate cannot know that that particular query now needs to be purged.
- */
-export type SearchResponseCacheIdentifier = {
-	__typename?: 'SearchResponseCacheIdentifier';
-	collectionSlug?: Maybe<Scalars['String']['output']>;
 };
 
 export type SearchResult = {
@@ -3191,6 +3182,7 @@ export type SearchResult = {
 	description: Scalars['String']['output'];
 	facetIds: Array<Scalars['ID']['output']>;
 	facetValueIds: Array<Scalars['ID']['output']>;
+	inStock: Scalars['Boolean']['output'];
 	price: SearchResultPrice;
 	priceWithTax: SearchResultPrice;
 	productAsset?: Maybe<SearchResultAsset>;
