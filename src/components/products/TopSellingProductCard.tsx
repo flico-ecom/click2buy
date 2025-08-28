@@ -8,20 +8,38 @@ import { APP_STATE } from '~/constants';
 import { Order } from '~/generated/graphql';
 import Swal from 'sweetalert2';
 import { useToast } from '~/components/toast/ToastContext';
+import { gsap } from 'gsap';
 
 export default component$(
-	({ productAsset, productName, slug, priceWithTax, currencyCode, collection }: any) => {
+	({ productAsset, productName, slug, priceWithTax, currencyCode, collection, index }: any) => {
 		const navigate = useNavigate();
 		const appState = useContext(APP_STATE);
 		const productSignal = useSignal<any>();
 		const toast = useToast();
+		const cardRef = useSignal<Element>();
 
-		useVisibleTask$(async () => {
+		useVisibleTask$(async ({ track }) => {
+			track(() => cardRef.value); // Track the ref value to re-run if it changes
 			productSignal.value = await getProductBySlug(slug);
+
+			// GSAP animation for slide-in and fade-in
+			if (cardRef.value) {
+				gsap.from(cardRef.value, {
+					x: 100, // Start 100px from the right
+					opacity: 0, // Start completely faded out
+					duration: 0.8, // Animation duration
+					ease: 'power3.out', // Smooth easing
+					delay: index * 0.1, // Staggered delay based on index
+					clearProps: 'all', // Remove inline styles after animation
+				});
+			}
 		});
 
 		return (
-			<div class=" relative flex flex-col items-center justify-between w-full max-w-xs p-1 sm:p-2 bg-white border border-gray-50 rounded-lg  hover:shadow-md transition-shadow duration-300">
+			<div
+				ref={cardRef}
+				class=" relative flex flex-col items-center justify-between w-full max-w-xs p-1 sm:p-2 bg-white border border-gray-50 rounded-lg  hover:shadow-md transition-shadow duration-300"
+			>
 				<a class="flex flex-col mx-auto" href={`/products/${slug}/`}>
 					<Image
 						layout="fixed"

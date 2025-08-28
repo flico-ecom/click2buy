@@ -23,7 +23,7 @@ export default component$(() => {
 		facedValues: [],
 		facetValueIds: [],
 	});
-	useVisibleTask$(({ cleanup }) => {
+	useVisibleTask$(() => {
 		gsap.registerPlugin(ScrollTrigger);
 
 		const animations: gsap.core.Tween[] = [];
@@ -47,10 +47,30 @@ export default component$(() => {
 			animations.push(anim);
 		}
 
-		cleanup(() => {
-			animations.forEach((anim) => anim.kill());
-			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+		let fadeInAnimated = false;
+		const scrollTrigger = ScrollTrigger.create({
+			trigger: '.product-fade',
+			start: 'top 80%',
+			toggleActions: 'play none none reverse',
+			onEnter: () => {
+				if (!fadeInAnimated) {
+					const fadeAnim = gsap.from('.product-fade > div', {
+						opacity: 0,
+						y: 30,
+						duration: 0.4,
+						stagger: 0.1,
+						ease: 'power2.out',
+					});
+					animations.push(fadeAnim);
+					fadeInAnimated = true;
+				}
+			},
 		});
+
+		return () => {
+			animations.forEach((anim) => anim.kill());
+			scrollTrigger.kill();
+		};
 	});
 
 	const fetchProducts = $(async () => {
@@ -118,8 +138,8 @@ export default component$(() => {
 						</div>
 					</div>
 					<div class="flex-1 flex ">
-						<div class="grid grid-cols-2  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-3">
-							{products.slice(0, 4).map((item, index) => (
+						<div class="grid grid-cols-2  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-3 product-fade">
+							{products.slice(0, 4).map((item) => (
 								<div key={item.productId}>
 									<TopSellingProductCard
 										collection={'Recommended'}
@@ -128,7 +148,6 @@ export default component$(() => {
 										slug={item.slug}
 										priceWithTax={item.priceWithTax}
 										currencyCode={item.currencyCode}
-										index={index}
 									></TopSellingProductCard>
 								</div>
 							))}
