@@ -15,10 +15,17 @@ import { cleanUpParams, generateDocumentHead } from '~/utils';
 import { splitDescriptionByHr } from '~/utils';
 import Swal from 'sweetalert2';
 import { useToast } from '~/components/toast/ToastContext';
+import { addRecentlyViewedProduct } from '~/utils/recently-viewed';
 
 export const useProductLoader = routeLoader$(async ({ params }) => {
 	const { slug } = cleanUpParams(params);
 	const product = await getProductBySlug(slug);
+
+	if (product) {
+		console.log('product ' + product.id);
+
+		addRecentlyViewedProduct(product.id);
+	}
 
 	if (product.assets.length === 1) {
 		product.assets.push({

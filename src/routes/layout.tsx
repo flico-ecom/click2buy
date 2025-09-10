@@ -20,7 +20,7 @@ import { extractLang } from '~/utils/i18n';
 import Cart from '../components/cart/Cart';
 import Footer from '../components/footer/footer';
 import Header from '../components/header/header';
-import HeaderBanner from '~/components/carousel/HeaderBanner';
+// import HeaderBanner from '~/components/carousel/HeaderBanner';
 import { Toast } from '~/components/toast/Toast';
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
@@ -33,6 +33,10 @@ export const useCollectionsLoader = routeLoader$(async () => {
 
 export const useAvailableCountriesLoader = routeLoader$(async () => {
 	return await getAvailableCountriesQuery();
+});
+
+export const useActiveOrderLoader = routeLoader$(async () => {
+	return await getActiveOrderQuery();
 });
 
 export const onRequest: RequestHandler = ({ request, locale }) => {
@@ -52,12 +56,13 @@ export default component$(() => {
 
 	const collectionsSignal = useCollectionsLoader();
 	const availableCountriesSignal = useAvailableCountriesLoader();
+	const activeOrderSignal = useActiveOrderLoader();
 
 	const state = useStore<AppState>({
 		showCart: false,
 		showMenu: false,
 		customer: { id: CUSTOMER_NOT_DEFINED_ID, firstName: '', lastName: '' } as ActiveCustomer,
-		activeOrder: {} as Order,
+		activeOrder: activeOrderSignal.value || ({} as Order),
 		collections: collectionsSignal.value || [],
 		availableCountries: availableCountriesSignal.value || [],
 		shippingAddress: {
@@ -80,10 +85,6 @@ export default component$(() => {
 
 	useContextProvider(APP_STATE, state);
 
-	useVisibleTask$(async () => {
-		state.activeOrder = await getActiveOrderQuery();
-	});
-
 	useVisibleTask$(({ track }) => {
 		track(() => state.showCart);
 		track(() => state.showMenu);
@@ -104,12 +105,12 @@ export default component$(() => {
 	);
 
 	return (
-		<div>
-			<HeaderBanner />
+		<div class="">
+			{/* <HeaderBanner /> */}
 			<Header />
 			<Cart />
 			<Menu />
-			<main class="pb-12 bg-[#F0F0F0]">
+			<main class="pb-12 bg-gray-50">
 				<Toast />
 				<Slot />
 			</main>

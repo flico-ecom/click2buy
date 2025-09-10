@@ -72,9 +72,9 @@ export default component$(() => {
 										/>
 									</a>
 								</div>
-								<div class="flex-grow max-w-xl hidden md:block">
+								{/* <div class="flex-grow max-w-xl hidden md:block">
 									<SearchBar />
-								</div>
+								</div> */}
 								<div class="flex-1 flex  justify-end gap-2 ">
 									<div class="ml-4 relative hidden md:flex">
 										<button
@@ -237,56 +237,10 @@ export default component$(() => {
 							)}
 						</div>
 					</div>
-					<div class="flex-grow flex md:hidden max-w-xs sm:max-w-none md:ml-auto justify-center">
-						<SearchBar />
-					</div>
-					<div class="md:flex hidden gap-3 ">
-						<a href={`/order-tracking`} class="flex items-center justify-center text-white text-sm">
-							{/* <a
-									class="flex "
-									
-								> */}
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="20"
-								height="20"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								class="h-4 w-4"
-								aria-hidden="true"
-							>
-								<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-								<circle cx="12" cy="9" r="2.5" />
-							</svg>
-							&nbsp; Track your order
-						</a>
-						<a href="tel:+94712464646" class="flex items-center justify-center text-white text-sm">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								class="h-4 w-4 "
-								aria-hidden="true"
-							>
-								<path
-									d="M22 16.92v3a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.81.37 1.6.72 2.34a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c.74.35 1.53.59 2.34.72A2 2 0 0 1 22 16.92z"
-									stroke="currentColor"
-									fill=""
-								/>
-							</svg>{' '}
-							&nbsp; +94 71 2 46 46 46
-						</a>
-					</div>
+					{/* <div class="flex-grow flex   justify-end"> */}
+					<SearchBar />
+					{/* </div> */}
+
 					<div class="ml-4 md:hidden">
 						<button
 							name="Cart"

@@ -580,6 +580,37 @@ export type CurrencyCode =
 	/** Zimbabwean dollar */
 	| 'ZWL';
 
+export interface HeroBanner {
+	sys: {
+		id: string;
+	};
+	fields: {
+		desktop: {
+			fields: {
+				description: string;
+				file: {
+					contentType: string;
+					fileName: string;
+					url: string;
+				};
+				title: string;
+			};
+		};
+		mobile: {
+			fields: {
+				description: string;
+				file: {
+					contentType: string;
+					fileName: string;
+					url: string;
+				};
+				title: string;
+			};
+		};
+		alt: string;
+	};
+}
+
 declare global {
 	interface Window {
 		payhere: {

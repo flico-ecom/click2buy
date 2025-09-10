@@ -3,10 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SearchResponse } from '~/generated/graphql';
 import { FacetWithValues } from '~/types';
-import {
-	searchAllProducts,
-	searchQueryWithCollectionSlug,
-} from '~/providers/shop/products/products';
+import { searchAllProducts } from '~/providers/shop/products/products';
 import { Image } from 'qwik-image';
 import TopSellingProductCard from '../products/TopSellingProductCard';
 

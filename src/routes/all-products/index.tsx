@@ -110,6 +110,7 @@ export default component$(() => {
 								slug={item.slug}
 								priceWithTax={item.priceWithTax}
 								currencyCode={item.currencyCode}
+								inStock={item.inStock}
 							></ProductCard>
 						))}
 					</div>

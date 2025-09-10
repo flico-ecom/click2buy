@@ -29,6 +29,10 @@ export const getProductBySlug = async (slug: string) => {
 	return shopSdk.product({ slug }).then((res: ProductQuery) => res.product as Product);
 };
 
+export const getProductById = async (id: string) => {
+	return shopSdk.product({ id }).then((res: ProductQuery) => res.product as Product);
+};
+
 export const detailedProductFragment = gql`
 	fragment DetailedProduct on Product {
 		id
