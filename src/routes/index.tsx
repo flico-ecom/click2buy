@@ -1,31 +1,52 @@
-import { component$, useContext } from '@builder.io/qwik';
-import AdBanners from '~/components/ad-banners/AdBanners';
-import { CollectionCarousel } from '~/components/carousel/CollectionCarousel';
+import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import Hero from '~/components/carousel/Hero';
-import RecommendedProducts from '~/components/recommended-products/RecommendedProducts';
-import TopSellings from '~/components/top-sellings/TopSellings';
-import { APP_STATE } from '~/constants';
+import HomeCategories from '~/components/home-categories/HomeCategories';
+import { MarqueeBrand } from '~/components/brand-carousel/marquee-brand';
 
 export default component$(() => {
-	const collections = useContext(APP_STATE).collections;
+	const showQR = useSignal(true);
+
+	const categories = [
+		{ slug: '-home-essentials', title: 'Home Essentials' },
+		{ slug: 'phone-tabs', title: 'Phones & Tabs' },
+	];
+
+	useVisibleTask$(() => {
+		const timer = setTimeout(() => {
+			showQR.value = false;
+		}, 10000);
+
+		return () => clearTimeout(timer);
+	});
 
 	return (
-		<div class="xl:max-w-7xl xl:mx-auto xl:px-8">
-			<Hero />
-
+		<div class="xl:max-w-7xl xl:mx-auto xl:px-8 relative">
+			<div class="flex ">
+				<Hero />
+			</div>
 			<section class="pt-12 xl:max-w-7xl xl:mx-auto xl:px-8">
 				<div class="mt-4 flow-root">
 					<div class="-my-2">
 						<div class="box-content py-2 px-2 relative overflow-x-auto xl:overflow-visible">
-							<div class="sm:px-6 lg:px-8 xl:px-0 pb-4">
-								<h2 class="sub-title">{$localize`Shop by Category`}</h2>
-							</div>
-							<CollectionCarousel collections={collections} autoplayInterval={3000} />
-							<TopSellings />
-							<div class="flex flex-col-reverse md:flex-col ">
-								<AdBanners />
-								<RecommendedProducts />
-							</div>
+							{categories.map((cat) => (
+								<HomeCategories key={cat.slug} slug={cat.slug} title={cat.title} />
+							))}
+							<MarqueeBrand
+								images={[
+									'/assets/brands/flico.png',
+									'/assets/brands/konka.jpg',
+									'/assets/brands/panasonic.png',
+									'/assets/brands/rico.png',
+									'/assets/brands/samsung.png',
+									'/assets/brands/whirlpool.png',
+									'/assets/brands/flico.png',
+									'/assets/brands/konka.jpg',
+									'/assets/brands/panasonic.png',
+									'/assets/brands/rico.png',
+									'/assets/brands/samsung.png',
+									'/assets/brands/whirlpool.png',
+								]}
+							/>
 						</div>
 					</div>
 				</div>

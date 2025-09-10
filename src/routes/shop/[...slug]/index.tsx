@@ -17,6 +17,7 @@ import {
 	generateDocumentHead,
 	groupFacetValues,
 } from '~/utils';
+import { addRecentlyViewedProduct } from '~/utils/recently-viewed';
 
 export const useCollectionLoader = routeLoader$(async ({ params }) => {
 	return await getCollectionBySlug(params.slug);
@@ -58,6 +59,11 @@ export default component$(() => {
 			? await searchQueryWithTerm(params.slug, '', state.facetValueIds)
 			: await searchQueryWithCollectionSlug(params.slug);
 		state.facedValues = groupFacetValues(state.search as SearchResponse, state.facetValueIds);
+
+		// Add product to recently viewed
+		if (state.search.items.length > 0) {
+			addRecentlyViewedProduct(state.search.items[0].productId);
+		}
 	});
 
 	const onFilterChange = $(async (id: string) => {
@@ -138,6 +144,7 @@ export default component$(() => {
 								slug={item.slug}
 								priceWithTax={item.priceWithTax}
 								currencyCode={item.currencyCode}
+								inStock={item.inStock}
 							></ProductCard>
 						))}
 					</div>

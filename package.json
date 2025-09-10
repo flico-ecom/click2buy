@@ -73,6 +73,7 @@
 		"@qwik-ui/headless": "^0.6.8",
 		"@stripe/stripe-js": "^3.0.0",
 		"braintree-web-drop-in": "^1.42.0",
+		"contentful": "^11.7.15",
 		"crypto-js": "^4.2.0",
 		"graphql": "^16.8.1",
 		"graphql-tag": "^2.12.6",

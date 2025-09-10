@@ -1,6 +1,7 @@
-import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
+import { component$, useSignal, useTask$, useVisibleTask$ } from '@builder.io/qwik';
 import { Carousel } from '@qwik-ui/headless';
 import { Image } from 'qwik-image';
+// import { fetchContentfulEntries } from '~/utils/contentful';
 
 export default component$(() => {
 	const isAutoplaySig = useSignal(false);
@@ -8,7 +9,6 @@ export default component$(() => {
 	useVisibleTask$(() => {
 		isAutoplaySig.value = true;
 	});
-
 	const bannerData = [
 		{
 			id: 1,

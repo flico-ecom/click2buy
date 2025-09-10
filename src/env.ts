@@ -11,6 +11,9 @@ const envVariables = z.object({
 	VITE_STRIPE_PUBLISHABLE_KEY: z.string(),
 	VITE_PAYHERE_MERCHANT_ID: z.string(),
 	VITE_PAYHERE_MERCHANT_SECRET: z.string(),
+
+	VITE_CONTENTFUL_SPACE_ID: z.string(),
+	VITE_CONTENTFUL_ACCESS_TOKEN: z.string(),
 });
 
 export const ENV_VARIABLES = envVariables.parse(import.meta.env);

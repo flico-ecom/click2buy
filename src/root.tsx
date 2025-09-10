@@ -4,6 +4,7 @@ import { Head } from './components/head/head';
 import { useToastProvider } from './components/toast/ToastContext';
 import globalStyles from './global.css?inline';
 import { useI18n } from './utils/i18n';
+import { NewsletterPopup } from './components/popups/NewsletterPopup';
 const chatbotUrl = import.meta.env.VITE_CHAT_WEBHOOK_URL;
 
 export default component$(() => {
@@ -54,7 +55,7 @@ export default component$(() => {
 			<Head />
 			<body lang="en">
 				<RouterOutlet />
-
+				<NewsletterPopup />
 				<ServiceWorkerRegister />
 			</body>
 		</QwikCityProvider>

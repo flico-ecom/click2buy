@@ -6,6 +6,14 @@ body {
 	@apply font-sans;
 }
 
+:root {
+	--marquee-width: 100%;
+	--marquee-height: 120px;
+	--marquee-elements-displayed: 6;
+	--marquee-element-width: calc(var(--marquee-width) / var(--marquee-elements-displayed));
+	--marquee-animation-duration: calc(var(--marquee-elements) * 3s);
+}
+
 @layer components {
 	.btn-primary {
 		@apply w-full border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-primary-500;
@@ -220,4 +228,101 @@ body {
 	display: flex;
 	gap: 1rem;
 	margin-block: 0.5rem;
+}
+
+/* Marquee  */
+
+.marquee-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.marquee {
+	width: var(--marquee-width);
+	height: var(--marquee-height);
+	/* background-color: #fff; */
+	overflow: hidden;
+	position: relative;
+}
+
+.marquee::before,
+.marquee::after {
+	position: absolute;
+	top: 0;
+	width: 10rem;
+	height: 100%;
+	content: '';
+	z-index: 2;
+	pointer-events: none;
+}
+
+.marquee::before {
+	left: 0;
+	/* background: linear-gradient(to right, #fff 0%, transparent 100%); */
+}
+
+.marquee::after {
+	right: 0;
+	/* background: linear-gradient(to left, #fff 0%, transparent 100%); */
+}
+
+.marquee-content {
+	list-style: none;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	animation: scrolling var(--marquee-animation-duration) linear infinite;
+	padding: 0;
+	margin: 0;
+}
+
+.marquee.reverse .marquee-content {
+	animation: scrolling-reverse var(--marquee-animation-duration) linear infinite;
+}
+
+@keyframes scrolling {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(calc(-1 * var(--marquee-element-width) * var(--marquee-elements)));
+	}
+}
+
+@keyframes scrolling-reverse {
+	0% {
+		transform: translateX(calc(-1 * var(--marquee-element-width) * var(--marquee-elements)));
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+.marquee-content li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+	width: var(--marquee-element-width);
+	height: 100%;
+	padding: 1rem;
+}
+
+.marquee-content li img {
+	max-height: 60%;
+	max-width: 100%;
+	object-fit: contain;
+	/* filter: invert(17%) sepia(92%) saturate(6614%) hue-rotate(258deg) brightness(96%) contrast(105%); */
+}
+
+@media (max-width: 768px) {
+	:root {
+		--marquee-elements-displayed: 3;
+	}
+
+	.marquee::before,
+	.marquee::after {
+		width: 5rem;
+	}
 }
