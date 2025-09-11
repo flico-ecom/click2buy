@@ -580,6 +580,22 @@ export type CurrencyCode =
 	/** Zimbabwean dollar */
 	| 'ZWL';
 
+export interface AdBanner {
+	sys: {
+		id: string;
+	};
+	fields: {
+		adImage: {
+			fields: {
+				file: {
+					url: string;
+				};
+			};
+		};
+		redirectionLink: string;
+	};
+}
+
 export interface HeroBanner {
 	sys: {
 		id: string;

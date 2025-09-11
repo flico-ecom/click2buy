@@ -2,14 +2,14 @@ import { component$ } from '@builder.io/qwik';
 
 export default component$(() => {
 	return (
-		<form action="/search">
+		<form action="/search" class="md:w-80">
 			<input
 				type="search"
 				name="q"
 				default-value={''}
 				placeholder={$localize`Search`}
 				autoComplete="off"
-				class="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md"
+				class="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-2xl"
 			/>
 		</form>
 	);

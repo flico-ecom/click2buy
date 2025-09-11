@@ -13,7 +13,6 @@ export default component$(() => {
 	useVisibleTask$(async () => {
 		const entries = await fetchContentfulEntries('heroSlider');
 		contentfulData.value = entries as unknown as HeroBanner[]; // Explicitly cast to HeroBanner[]
-		console.log('this is all stuff ', contentfulData.value);
 	});
 
 	useVisibleTask$(() => {

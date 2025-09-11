@@ -22,8 +22,6 @@ export const useProductLoader = routeLoader$(async ({ params }) => {
 	const product = await getProductBySlug(slug);
 
 	if (product) {
-		console.log('product ' + product.id);
-
 		addRecentlyViewedProduct(product.id);
 	}
 
@@ -43,7 +41,6 @@ export default component$(() => {
 	const productSignal = useProductLoader();
 	const toast = useToast();
 	const navigate = useNavigate();
-	// console.log(productSignal.value.variants);
 	const currentImageSig = useSignal(productSignal.value.assets[0]);
 	const selectedVariantIdSignal = useSignal(productSignal.value.variants[0].id);
 	const selectedVariantSignal = useComputed$(() =>
@@ -80,7 +77,7 @@ export default component$(() => {
 								?.breadcrumbs ?? []
 						}
 					></Breadcrumbs>
-					<div class="md:grid md:grid-cols-3 md:gap-x-4 justify-center md:items-start mt-4 md:mt-12">
+					<div class="md:grid md:grid-cols-2 md:gap-x-4 justify-center md:items-start mt-4 md:mt-12">
 						<div class="w-full sm:block">
 							<span class="rounded-md overflow-hidden">
 								<div class="w-full">
@@ -116,35 +113,9 @@ export default component$(() => {
 								)}
 							</span>
 						</div>
-						<div class="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
-							<div class="">
-								<h2 class="sub-title mt-0 mb-2 ">{productSignal.value.name}</h2>
-								<div class="my-2 flex items-center space-x-2 mb-2 ">
-									<span class="text-gray-600 text-xs font-medium bg-white  inline-flex items-center px-2 py-0.5 rounded ">
-										SKU : {selectedVariantSignal.value?.sku}
-									</span>
-									<StockLevelLabel stockLevel={selectedVariantSignal.value?.stockLevel} />
-								</div>
-								<h3 class="sr-only font-serif">Description</h3>
-								{splitDescriptionByHr(productSignal.value.description)[0] ? (
-									<div
-										class="text-sm text-gray-700"
-										dangerouslySetInnerHTML={
-											splitDescriptionByHr(productSignal.value.description)[0]
-										}
-									/>
-								) : (
-									<div
-										class="text-sm text-gray-700"
-										dangerouslySetInnerHTML={productSignal.value.description}
-									/>
-								)}
-								{/* <div
-									class="text-sm text-gray-700"
-									dangerouslySetInnerHTML={splitDescriptionByHr(productSignal.value.description)[0]}
-								/> */}
-							</div>
-							{/* {1 < productSignal.value.variants.length && (
+						{/* <div class="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0"> */}
+
+						{/* {1 < productSignal.value.variants.length && (
 									<div class="mt-4">
 										<label class="block text-sm font-medium text-gray-700">Select option</label>
 										<select
@@ -164,7 +135,7 @@ export default component$(() => {
 										</select>
 									</div>
 								)} */}
-							{/* <div class="mt-10 flex flex-col sm:flex-row sm:items-center">
+						{/* <div class="mt-10 flex flex-col sm:flex-row sm:items-center">
 									<Price
 										priceWithTax={selectedVariantSignal.value?.priceWithTax}
 										currencyCode={selectedVariantSignal.value?.currencyCode}
@@ -218,84 +189,88 @@ export default component$(() => {
 									</div>
 								</div> */}
 
-							{!!addItemToOrderErrorSignal.value && (
-								<div class="mt-4">
-									<Alert message={addItemToOrderErrorSignal.value} />
+						{/* </div> */}
+						<div class="w-full  ">
+							<div class="">
+								<h2 class="sub-title mt-0 mb-2 ">{productSignal.value.name}</h2>
+								<div class="my-2 flex items-center space-x-2 mb-2 ">
+									<span class="text-gray-600 text-xs font-medium bg-white  inline-flex items-center px-2 py-0.5 rounded ">
+										SKU : {selectedVariantSignal.value?.sku}
+									</span>
+									<StockLevelLabel stockLevel={selectedVariantSignal.value?.stockLevel} />
 								</div>
-							)}
-						</div>
-						<div class="w-full p-8 border rounded-lg bg-white">
-							<div class=" py-2 flex flex-col justify-center w-full gap-4">
-								{1 < productSignal.value.variants.length && (
-									// <div class="mt-4">
-									// 	<label class="block text-sm font-medium text-gray-700">Select option</label>
-									// 	<select
-									// 		class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
-									// 		value={selectedVariantIdSignal.value}
-									// 		onChange$={(_, el) => (selectedVariantIdSignal.value = el.value)}
-									// 	>
-									// 		{productSignal.value.variants.map((variant) => (
-									// 			<option
-									// 				key={variant.id}
-									// 				value={variant.id}
-									// 				selected={selectedVariantIdSignal.value === variant.id}
-									// 			>
-									// 				{variant.name}
-									// 			</option>
-									// 		))}
-									// 	</select>
-									// </div>
-									<div class="mt-1 space-y-2">
-										{productSignal.value.variants.map((variant) => (
-											<label
-												key={variant.id}
-												class="flex items-center space-x-2 border p-2 rounded-md cursor-pointer hover:bg-gray-50"
-											>
-												<input
-													type="radio"
-													name="variant"
-													value={variant.id}
-													checked={selectedVariantIdSignal.value === variant.id}
-													onChange$={() => (selectedVariantIdSignal.value = variant.id)}
-													class="text-primary-500"
-												/>
-												<span>{variant.name}</span>
-											</label>
-										))}
-									</div>
-								)}
 								<Price
 									priceWithTax={selectedVariantSignal.value?.priceWithTax}
 									currencyCode={selectedVariantSignal.value?.currencyCode}
 									variantSig={selectedVariantSignal}
 									forcedClass="text-xl text-green-600 mr-4 "
 								></Price>
-
-								<div class="flex items-center">
-									<div class="flex space-x-2">
-										<div class="">
-											<Image
-												src="/assets/svg/visa.svg"
-												alt="Apple Pay"
-												width={30}
-												height={20}
-												class="h-5 w-auto"
-												layout="constrained"
-											/>
-										</div>
-										<div>
-											<Image
-												src="/assets/svg/mastercard.svg"
-												alt="Visa"
-												width={30}
-												height={20}
-												class="h-5 w-auto"
-												layout="constrained"
-											/>
-										</div>
+								<h3 class="sr-only font-serif">Description</h3>
+								{/* {splitDescriptionByHr(productSignal.value.description)[0] ? (
+									<div
+										class="text-sm text-gray-700"
+										dangerouslySetInnerHTML={
+											splitDescriptionByHr(productSignal.value.description)[0]
+										}
+									/>
+								) : (
+									<div
+										class="text-sm text-gray-700"
+										dangerouslySetInnerHTML={productSignal.value.description}
+									/>
+								)} */}
+								{/* <div
+									class="text-sm text-gray-700"
+									dangerouslySetInnerHTML={splitDescriptionByHr(productSignal.value.description)[0]}
+								/> */}
+								{!!addItemToOrderErrorSignal.value && (
+									<div class="mt-4">
+										<Alert message={addItemToOrderErrorSignal.value} />
 									</div>
-								</div>
-								<div class="flex md:flex-col gap-1 align-baseline">
+								)}
+							</div>
+
+							<div class=" py-2 flex flex-col justify-center w-full gap-4">
+								{1 < productSignal.value.variants.length && (
+									<div class="mt-4">
+										<label class="block text-sm font-medium text-gray-700">Select option</label>
+										<select
+											class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
+											value={selectedVariantIdSignal.value}
+											onChange$={(_, el) => (selectedVariantIdSignal.value = el.value)}
+										>
+											{productSignal.value.variants.map((variant) => (
+												<option
+													key={variant.id}
+													value={variant.id}
+													selected={selectedVariantIdSignal.value === variant.id}
+												>
+													{variant.name}
+												</option>
+											))}
+										</select>
+									</div>
+									// <div class="mt-1 space-y-2">
+									// 	{productSignal.value.variants.map((variant) => (
+									// 		<label
+									// 			key={variant.id}
+									// 			class="flex items-center space-x-2 border p-2 rounded-md cursor-pointer hover:bg-gray-50"
+									// 		>
+									// 			<input
+									// 				type="radio"
+									// 				name="variant"
+									// 				value={variant.id}
+									// 				checked={selectedVariantIdSignal.value === variant.id}
+									// 				onChange$={() => (selectedVariantIdSignal.value = variant.id)}
+									// 				class="text-primary-500"
+									// 			/>
+									// 			<span>{variant.name}</span>
+									// 		</label>
+									// 	))}
+									// </div>
+								)}
+
+								<div class="flex gap-1 align-baseline">
 									<button
 										class={{
 											'card-btn group p-1 sm:p-2 flex flex-1 bg-orange-500 text-white justify-center gap-1 md:flex-1  rounded-md transition-colors text-sm':
@@ -404,6 +379,32 @@ export default component$(() => {
 										</svg>
 									</button>
 								</div>
+
+								<h4>Guaranteed Safe Checkout</h4>
+								<div class="flex items-center">
+									<div class="flex space-x-2">
+										<div class="">
+											<Image
+												src="/assets/svg/visa.svg"
+												alt="Apple Pay"
+												width={30}
+												height={20}
+												class="h-5 w-auto"
+												layout="constrained"
+											/>
+										</div>
+										<div>
+											<Image
+												src="/assets/svg/mastercard.svg"
+												alt="Visa"
+												width={30}
+												height={20}
+												class="h-5 w-auto"
+												layout="constrained"
+											/>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -426,7 +427,7 @@ export default component$(() => {
 								}}
 								onClick$={() => (activeTabSignal.value = 'description')}
 							>
-								{$localize`Description`}
+								Description
 							</button>
 							<button
 								class={{
@@ -438,7 +439,7 @@ export default component$(() => {
 								}}
 								onClick$={() => (activeTabSignal.value = 'specifications')}
 							>
-								{$localize`Specifications`}
+								Specifications
 							</button>
 						</nav>
 					</div>

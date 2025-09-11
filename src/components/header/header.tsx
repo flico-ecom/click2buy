@@ -46,6 +46,7 @@ export default component$(() => {
 	return (
 		<div class={`bg-[#262261] shadow-xl sticky top-0 z-20`}>
 			<header>
+				<div class="h-4 bg-orange-500"></div>
 				<div class="bg-zinc-100 text-gray-600 pt-4 pb-3 shadow-inner text-center text-sm   xl:px-0">
 					<div class="max-w-6xl mx-auto h-5 min-h-full flex items-center justify-between my-1 px-4 sm:px-6">
 						<div class="flex justify-between items-center w-full">
@@ -75,12 +76,12 @@ export default component$(() => {
 								{/* <div class="flex-grow max-w-xl hidden md:block">
 									<SearchBar />
 								</div> */}
-								<div class="flex-1 flex  justify-end gap-2 ">
+								<div class="flex-1 flex  justify-end gap-4	 ">
 									<div class="ml-4 relative hidden md:flex">
 										<button
 											name="Cart"
 											aria-label={`${totalQuantity} items in cart`}
-											class=" w-9 h-9 bg-gray-400 bg-opacity-20 rounded flex items-center justify-center text-white p-1"
+											class=" w-9 h-9  rounded flex items-center justify-center text-white "
 											onClick$={() => (appState.showCart = !appState.showCart)}
 										>
 											<svg
@@ -237,7 +238,7 @@ export default component$(() => {
 							)}
 						</div>
 					</div>
-					{/* <div class="flex-grow flex   justify-end"> */}
+					{/* <div class="max-w-2xl"> */}
 					<SearchBar />
 					{/* </div> */}
 
