@@ -8,8 +8,8 @@ export default component$(() => {
 	const contentfulData = useSignal<AdBanner[]>([]);
 
 	const getRandomDelay = $(() => {
-		const min = 1 * 60 * 1000; // 1 minute
-		const max = 2 * 60 * 1000; // 2 minutes
+		const min = 30000; // 30 second
+		const max = 1 * 60 * 1000; // 1 minutes
 		return Math.floor(Math.random() * (max - min + 1) + min);
 	});
 
@@ -31,7 +31,7 @@ export default component$(() => {
 		let hideTimer: NodeJS.Timeout;
 
 		const schedulePopup = async () => {
-			const delay = Math.random() > 0.5 ? await getRandomDelay() : 2 * 60 * 1000;
+			const delay = Math.random() > 0.5 ? await getRandomDelay() : 30 * 1000;
 			mainTimer = setTimeout(async () => {
 				currentAd.value = Math.floor(Math.random() * contentfulData.value.length);
 				visible.value = true;
