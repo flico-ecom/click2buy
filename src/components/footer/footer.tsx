@@ -1,12 +1,14 @@
 import { component$ } from '@builder.io/qwik';
 import { Image } from 'qwik-image';
+import { date } from 'zod';
 
 export default component$(() => {
+	const year = new Date().getFullYear();
 	return (
 		<footer class="">
 			{/* Top Bar */}
-			<div class="bg-[#262261]  text-white py-4 px-4">
-				<div class="max-w-6xl  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 text-sm">
+			<div class="border-[#262261] border border-x-0  text-white py-4 px-4">
+				{/* <div class="max-w-6xl  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 text-sm">
 					<div class="flex items-center justify-center md:justify-start">
 						<span class="text-lg">Customer Support 8.00.AM - 5.00.PM</span>
 					</div>
@@ -22,12 +24,100 @@ export default component$(() => {
 					<div class="flex items-center justify-center md:justify-start">
 						<span class="text-lg">After Service</span>
 					</div>
+				</div> */}
+				<div class="flex flex-1 justify-end md:justify-center gap-4 mb-4 md:mb-0">
+					{/* Placeholder for bank logos */}
+					<Image
+						src="/assets/svg/visa.svg"
+						alt="Visa"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					<Image
+						src="/assets/svg/mastercard.svg"
+						alt="Mastercard"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					<Image
+						src="/assets/svg/nationstrust.png"
+						alt="Mastercard"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					<Image
+						src="/assets/svg/commercial.png"
+						alt="Mastercard"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					<Image
+						src="/assets/svg/hnb.png"
+						alt="Mastercard"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					<Image
+						src="/assets/svg/cargills.png"
+						alt="Mastercard"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					<Image
+						src="/assets/svg/dfcc.png"
+						alt="Mastercard"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					<Image
+						src="/assets/svg/peoples.png"
+						alt="Mastercard"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					<Image
+						src="/assets/svg/seylan.png"
+						alt="Mastercard"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					<Image
+						src="/assets/svg/sampath.png"
+						alt="Mastercard"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					<Image
+						src="/assets/svg/union.png"
+						alt="Mastercard"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					<Image
+						src="/assets/svg/panasia.png"
+						alt="Mastercard"
+						width={40}
+						height={25}
+						layout="constrained"
+					/>
+					{/* Add more bank logos here as Image components if available */}
 				</div>
 			</div>
 
 			{/* Main Footer Content */}
 			<div class="bg-white py-12  px-4 sm:px-6 lg:py-8 lg:px-8">
-				<div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-4">
+				<div class="max-w-6xl mx-auto  grid grid-cols-2 md:grid-cols-4 gap-4">
 					{/* Contact Information */}
 					<div class="flex flex-col space-y-4">
 						<div class="text-sm">
@@ -50,8 +140,6 @@ export default component$(() => {
 							</a>
 						</div> */}
 					</div>
-
-					<div class=""></div>
 
 					{/* About Column */}
 					<div>
@@ -137,98 +225,10 @@ export default component$(() => {
 			</div>
 
 			{/* Payment Methods / Copyright */}
-			<div class="bg-white py-4 px-4 sm:px-6 lg:px-8">
-				<div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
-					{/* <div class="text-sm text-gray-600">
-						Copyright © 2024 Click2Buy.lk All Rights Reserved.
-					</div> */}
-					<div class="flex flex-1 justify-end md:justify-center gap-4 mb-4 md:mb-0">
-						{/* Placeholder for bank logos */}
-						<Image
-							src="/assets/svg/visa.svg"
-							alt="Visa"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						<Image
-							src="/assets/svg/mastercard.svg"
-							alt="Mastercard"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						<Image
-							src="/assets/svg/nationstrust.png"
-							alt="Mastercard"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						<Image
-							src="/assets/svg/commercial.png"
-							alt="Mastercard"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						<Image
-							src="/assets/svg/hnb.png"
-							alt="Mastercard"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						<Image
-							src="/assets/svg/cargills.png"
-							alt="Mastercard"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						<Image
-							src="/assets/svg/dfcc.png"
-							alt="Mastercard"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						<Image
-							src="/assets/svg/peoples.png"
-							alt="Mastercard"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						<Image
-							src="/assets/svg/seylan.png"
-							alt="Mastercard"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						<Image
-							src="/assets/svg/sampath.png"
-							alt="Mastercard"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						<Image
-							src="/assets/svg/union.png"
-							alt="Mastercard"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						<Image
-							src="/assets/svg/panasia.png"
-							alt="Mastercard"
-							width={40}
-							height={25}
-							layout="constrained"
-						/>
-						{/* Add more bank logos here as Image components if available */}
+			<div class="bg-white py-4 flex border-t border-[#262261] px-4 sm:px-6 lg:px-8">
+				<div class="max-w-6xl mx-auto  justify-center items-center">
+					<div class="text-sm text-gray-600">
+						Copyright ©{year} Click2Buy.lk All Rights Reserved.
 					</div>
 				</div>
 			</div>

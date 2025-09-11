@@ -55,7 +55,7 @@ export default component$(() => {
 	return (
 		<>
 			<div
-				class={`fixed top-36 right-6 z-[9000] bg-white shadow-xl rounded-2xl w-96 transform transition-transform 
+				class={`fixed bottom-20 right-6 z-[9000] bg-white shadow-xl rounded-2xl w-96 transform transition-transform 
                         duration-500 ease-in-out ${
 													visible.value ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
 												}`}
