@@ -43,33 +43,51 @@ export const NewsletterPopup = component$(() => {
 	return (
 		<>
 			{showPopup.value && (
-				<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+				<div class="fixed inset-0 z-[2000] flex items-center justify-center bg-black bg-opacity-50">
 					<div
 						class={`
-              bg-white p-4 rounded shadow w-96 transform transition-transform duration-300
-              ${animateIn.value ? 'translate-x-0' : 'translate-x-full'}
+              bg-white rounded-lg shadow-xl w-full max-w-md transform transition-transform duration-300 ease-out
+              ${animateIn.value ? 'scale-100 opacity-100' : 'scale-90 opacity-0'}
             `}
 					>
-						<h2 class="text-lg font-bold mb-2">Subscribe to our Newsletter</h2>
-						<p class="mb-4">Stay updated with our latest news.</p>
+						<div class="flex flex-col items-center p-6">
+							<img src="/logo.svg" alt="Logo" class="h-16 w-16 mb-4" />
+							<h2 class="text-2xl font-bold text-primary-700 mb-2">Join Our Newsletter!</h2>
+							<p class="text-center text-gray-700 mb-6">
+								Subscribe to get the latest updates, exclusive offers, and more directly in your
+								inbox.
+							</p>
 
-						<div class="flex items-center mb-4">
 							<input
-								type="checkbox"
-								id="dont-show"
-								checked={dontShowAgain.value}
-								onChange$={$((e) => {
-									dontShowAgain.value = (e.target as HTMLInputElement).checked;
-								})}
+								type="email"
+								placeholder="Enter your email"
+								class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
 							/>
-							<label for="dont-show" class="ml-2">
-								Don’t show again
-							</label>
-						</div>
 
-						<div class="flex justify-end">
-							<button class="px-3 py-1 bg-gray-200 rounded" onClick$={handleClose}>
-								Close
+							<button class="w-full bg-primary-600 text-white py-3 rounded-md hover:bg-primary-700 transition-colors duration-300 mb-4">
+								Subscribe
+							</button>
+
+							<div class="flex items-center mb-4">
+								<input
+									type="checkbox"
+									id="dont-show"
+									checked={dontShowAgain.value}
+									onChange$={$((e) => {
+										dontShowAgain.value = (e.target as HTMLInputElement).checked;
+									})}
+									class="form-checkbox h-4 w-4 text-primary-600 transition duration-150 ease-in-out"
+								/>
+								<label for="dont-show" class="ml-2 text-gray-600">
+									Don’t show again
+								</label>
+							</div>
+
+							<button
+								class="text-gray-500 hover:text-gray-700 transition-colors duration-300"
+								onClick$={handleClose}
+							>
+								No, thanks
 							</button>
 						</div>
 					</div>

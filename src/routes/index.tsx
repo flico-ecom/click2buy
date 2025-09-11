@@ -5,7 +5,6 @@ import { MarqueeBrand } from '~/components/brand-carousel/marquee-brand';
 
 export default component$(() => {
 	const showQR = useSignal(true);
-
 	const categories = [
 		{ slug: '-home-essentials', title: 'Home Essentials' },
 		{ slug: 'phone-tabs', title: 'Phones & Tabs' },
