@@ -1,6 +1,5 @@
 import { component$ } from '@builder.io/qwik';
 import { Image } from 'qwik-image';
-import { date } from 'zod';
 
 export default component$(() => {
 	const year = new Date().getFullYear();
