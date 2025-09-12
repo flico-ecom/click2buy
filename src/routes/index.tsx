@@ -9,10 +9,6 @@ export default component$(() => {
 	const collections = useContext(APP_STATE).collections.filter(
 		(item) => item.parent?.name === '__root_collection__' && !!item.featuredAsset
 	);
-	const categories = [
-		{ slug: '-home-essentials', title: 'Home Essentials' },
-		{ slug: 'phone-tabs', title: 'Phones & Tabs' },
-	];
 
 	useVisibleTask$(() => {
 		const timer = setTimeout(() => {

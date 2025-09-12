@@ -40,7 +40,7 @@ export default component$(({ slug, title }: IProps) => {
 				<div class="flex items-center gap-4">
 					<h2 class="sub-title">{title}</h2>
 					<a href={`/collections/${slug}`}>
-						<span class="bg-gray-300 px-4  py-1 rounded-xl font-medium">View </span>
+						<span class="bg-gray-300 px-4  py-1 rounded-full font-medium">View </span>
 					</a>
 				</div>
 				{/* <div class="flex   md:gap-0 gap-4"> */}
