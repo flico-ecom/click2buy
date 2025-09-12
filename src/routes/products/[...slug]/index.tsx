@@ -1,4 +1,4 @@
-import { component$, useComputed$, useContext, useSignal } from '@builder.io/qwik';
+import { $, component$, useComputed$, useContext, useSignal } from '@builder.io/qwik';
 import { DocumentHead, routeLoader$, useNavigate } from '@builder.io/qwik-city';
 import { Image } from 'qwik-image';
 import Alert from '~/components/alert/Alert';
@@ -59,6 +59,18 @@ export default component$(() => {
 			result[variant.id] = orderLine?.quantity || 0;
 		});
 		return result;
+	});
+
+	const quantity = useSignal(1); // default product quantity
+
+	const increment = $(() => {
+		quantity.value++;
+	});
+
+	const decrement = $(() => {
+		if (quantity.value > 1) {
+			quantity.value--;
+		}
 	});
 
 	return (
@@ -205,6 +217,40 @@ export default component$(() => {
 									variantSig={selectedVariantSignal}
 									forcedClass="text-xl text-green-600 mr-4 "
 								></Price>
+								<div class="flex flex-col  gap-2 mt-3 ">
+									<div class="flex gap-2 items-center ">
+										<h3 class="font-semibold">Warranty : </h3>
+										<span class="text-green-700 text-sm bg-green-100 font-medium px-2 rounded-md ">
+											3 YEARS WARRANTY
+										</span>
+									</div>
+									<div class="flex gap-2 items-center">
+										<h3 class="font-semibold">Delivery : </h3>
+										<span class="text-gray-500 text-sm  font-medium px-2 rounded-md ">
+											Within 3 Working Days
+										</span>
+									</div>
+									<div class="flex gap-2 items-center ">
+										<h3 class="font-semibold">Delivery Fee : </h3>
+										<span class="text-gray-500 text-sm  font-medium px-2 rounded-md ">
+											Island Wide Delivery for 480{' '}
+										</span>
+									</div>
+									<div class="flex gap-2 items-center ">
+										<h3 class="font-semibold">Quantity : </h3>
+										<div class="flex items-center gap-2 border rounded ">
+											{/* Decrement Button */}
+											<button onClick$={decrement} class="px-3 py-1 text-xl font-bold">
+												-
+											</button>
+											<span class="text-lg font-medium">{quantity.value}</span>
+											<button onClick$={increment} class="px-3 py-1 text-xl font-bold">
+												+
+											</button>
+										</div>
+									</div>
+								</div>
+
 								<h3 class="sr-only font-serif">Description</h3>
 								{/* {splitDescriptionByHr(productSignal.value.description)[0] ? (
 									<div
