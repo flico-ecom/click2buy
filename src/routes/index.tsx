@@ -1,10 +1,14 @@
-import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
+import { component$, useContext, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import Hero from '~/components/carousel/Hero';
 import HomeCategories from '~/components/home-categories/HomeCategories';
 import { MarqueeBrand } from '~/components/brand-carousel/marquee-brand';
+import { APP_STATE } from '~/constants';
 
 export default component$(() => {
 	const showQR = useSignal(true);
+	const collections = useContext(APP_STATE).collections.filter(
+		(item) => item.parent?.name === '__root_collection__' && !!item.featuredAsset
+	);
 	const categories = [
 		{ slug: '-home-essentials', title: 'Home Essentials' },
 		{ slug: 'phone-tabs', title: 'Phones & Tabs' },
@@ -27,8 +31,8 @@ export default component$(() => {
 				<div class="mt-4 flow-root">
 					<div class="-my-2">
 						<div class="box-content py-2 px-2 relative overflow-x-auto xl:overflow-visible">
-							{categories.map((cat) => (
-								<HomeCategories key={cat.slug} slug={cat.slug} title={cat.title} />
+							{collections.map((cat) => (
+								<HomeCategories key={cat.slug} slug={cat.slug} title={cat.name} />
 							))}
 							<MarqueeBrand
 								images={[
